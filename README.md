@@ -373,3 +373,18 @@ Perbaikan yang sudah diterapkan:
 - Menambah ruang aman di atas navigasi bawah
 - Mengganti label aksesibilitas “foto” menjadi “journey fragment”
 - Membersihkan instruksi lama mengenai empat foto memory
+
+
+## Desktop scroll and performance revision
+
+This revision adds:
+
+- A dedicated scroll area for Journey Shards text on desktop.
+- Short-screen desktop rules for Firefox and Android desktop mode.
+- Automatic performance mode for Firefox and lower-resource devices.
+- Lower background particle counts and canvas resolution in performance mode.
+- Reduced blur/backdrop effects while retaining the overall design.
+- Lower finale particle counts on lower-resource devices.
+
+The clipping problem was a CSS layout issue, not a RAM failure. RAM and browser
+choice mainly affect animation smoothness.

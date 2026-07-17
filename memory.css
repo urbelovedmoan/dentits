@@ -757,3 +757,93 @@ body.memory-modal-open { overflow: hidden; }
     radial-gradient(circle at 50% 24%, rgba(188,167,255,.22), transparent 30%),
     linear-gradient(145deg, #654489, #241341 72%);
 }
+
+
+/* Desktop modal: provide a definite grid height so the text column can scroll. */
+@media (min-width: 901px) {
+  .memory-modal__dialog {
+    height: min(850px, calc(100dvh - 34px));
+    max-height: min(850px, calc(100dvh - 34px));
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .memory-modal__stage,
+  .memory-modal__copy {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .memory-modal__copy {
+    justify-content: flex-start;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    padding-top: max(62px, 5vw);
+    padding-bottom: 52px;
+  }
+
+  .memory-modal__copy::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  .memory-modal__copy::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: rgba(218, 198, 235, 0.28);
+    background-clip: padding-box;
+  }
+}
+
+/* Short laptops and desktop mode on phones/tablets. */
+@media (min-width: 901px) and (max-height: 720px) {
+  .memory-modal {
+    padding: 10px 14px;
+  }
+
+  .memory-modal__dialog {
+    width: min(1120px, calc(100vw - 28px));
+    height: calc(100dvh - 20px);
+    max-height: calc(100dvh - 20px);
+    border-radius: 24px;
+  }
+
+  .memory-modal__stage {
+    min-height: 0;
+    padding: 22px;
+  }
+
+  .memory-modal__journey-wrap {
+    width: min(390px, 37vw);
+    height: calc(100dvh - 66px);
+    min-height: 0;
+    max-height: 570px;
+  }
+
+  .memory-modal__journey-glyph {
+    width: min(155px, 15vw);
+  }
+
+  .memory-modal__copy {
+    padding: 55px 38px 36px;
+  }
+
+  .memory-modal__counter {
+    margin-bottom: 18px;
+  }
+
+  .memory-modal__copy h2 {
+    font-size: clamp(2.45rem, 4.15vw, 4.15rem);
+    line-height: 0.94;
+  }
+
+  .memory-modal__copy > p:not(.eyebrow) {
+    margin-top: 18px;
+    font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  }
+
+  .memory-modal__dots {
+    margin-top: 24px;
+    padding-bottom: 4px;
+  }
+}

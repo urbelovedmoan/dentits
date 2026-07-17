@@ -77,7 +77,10 @@
   }
 
   function resizeCanvas() {
-    state.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    state.dpr = Math.min(
+      window.devicePixelRatio || 1,
+      app.performanceMode ? 1.25 : 2
+    );
     state.width = window.innerWidth;
     state.height = window.innerHeight;
 
@@ -183,7 +186,11 @@
   function startParticles() {
     if (app.reducedMotion) return;
 
-    createCelebrationParticles(window.innerWidth < 640 ? 105 : 190);
+    const particleCount = app.performanceMode
+      ? (window.innerWidth < 640 ? 52 : 86)
+      : (window.innerWidth < 640 ? 105 : 190);
+
+    createCelebrationParticles(particleCount);
     state.runningParticles = true;
     cancelAnimationFrame(state.animationId);
     animateParticles();

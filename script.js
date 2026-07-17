@@ -328,7 +328,22 @@
     constellationCollected: false,
     secretLetterOpened: false,
     finaleCompleted: false,
+    performanceMode: false,
   };
+
+
+  function detectPerformanceMode() {
+    const userAgent = navigator.userAgent || "";
+    const isFirefox = /firefox/i.test(userAgent);
+    const deviceMemory = Number(navigator.deviceMemory || 0);
+    const logicalProcessors = Number(navigator.hardwareConcurrency || 0);
+
+    const lowMemory = deviceMemory > 0 && deviceMemory <= 4;
+    const limitedCpu = logicalProcessors > 0 && logicalProcessors <= 4;
+
+    state.performanceMode = isFirefox || lowMemory || limitedCpu;
+    document.body.classList.toggle("performance-mode", state.performanceMode);
+  }
 
   function applyConfig() {
     document.title = `${siteConfig.website.title} — ${siteConfig.graduate.nickname}'s Graduation`;
@@ -348,7 +363,9 @@
   }
 
   function createStars() {
-    const starCount = window.innerWidth < 640 ? 42 : 78;
+    const starCount = state.performanceMode
+      ? (window.innerWidth < 640 ? 24 : 42)
+      : (window.innerWidth < 640 ? 42 : 78);
     const fragment = document.createDocumentFragment();
 
     for (let index = 0; index < starCount; index += 1) {
@@ -374,7 +391,10 @@
     let devicePixelRatio = 1;
 
     function resizeCanvas() {
-      devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      devicePixelRatio = Math.min(
+        window.devicePixelRatio || 1,
+        state.performanceMode ? 1.25 : 2
+      );
       width = window.innerWidth;
       height = window.innerHeight;
 
@@ -385,7 +405,9 @@
 
       context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
 
-      const count = width < 640 ? 18 : 34;
+      const count = state.performanceMode
+        ? (width < 640 ? 10 : 18)
+        : (width < 640 ? 18 : 34);
       state.particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -396,7 +418,18 @@
       }));
     }
 
-    function draw() {
+    let previousFrameTime = 0;
+
+    function draw(timestamp = 0) {
+      if (
+        state.performanceMode &&
+        timestamp - previousFrameTime < 32
+      ) {
+        state.canvasAnimationId = window.requestAnimationFrame(draw);
+        return;
+      }
+
+      previousFrameTime = timestamp;
       context.clearRect(0, 0, width, height);
 
       if (!state.reducedMotion) {
@@ -1043,7 +1076,9 @@
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const colors = ["#ffffff", "#bca7ff", "#f6a6cd", "#e7c680", "#9fe7ef"];
-    const count = state.reducedMotion ? 0 : 38;
+    const count = state.reducedMotion
+      ? 0
+      : (state.performanceMode ? 18 : 38);
 
     for (let index = 0; index < count; index += 1) {
       const particle = document.createElement("span");
@@ -1312,9 +1347,13 @@
     get reducedMotion() {
       return state.reducedMotion;
     },
+    get performanceMode() {
+      return state.performanceMode;
+    },
   };
 
   function init() {
+    detectPerformanceMode();
     applyConfig();
     createStars();
     setupCanvas();

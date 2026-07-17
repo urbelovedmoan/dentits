@@ -1,0 +1,67 @@
+
+/*
+  Automatic performance mode
+  Activated by script.js for Firefox or devices reporting <=4 GB memory /
+  <=4 logical processors. The visual design remains intact, but expensive
+  blur and continuous decorative effects are reduced.
+*/
+
+body.performance-mode * {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.performance-mode .glass-panel,
+body.performance-mode .app-header,
+body.performance-mode .scene-navigation,
+body.performance-mode .memory-modal__dialog,
+body.performance-mode .constellation-message {
+  background-color: rgba(18, 10, 40, 0.94);
+}
+
+body.performance-mode .memory-modal__backdrop {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(123, 81, 174, 0.17), transparent 38%),
+    rgba(5, 3, 15, 0.94);
+}
+
+body.performance-mode .ambient-glow,
+body.performance-mode .celestial-haze,
+body.performance-mode .finale-light-beam {
+  filter: blur(24px) !important;
+  opacity: 0.22 !important;
+}
+
+body.performance-mode .memory-modal__shine {
+  display: none;
+}
+
+body.performance-mode .star {
+  animation-duration: calc(var(--duration) * 1.75);
+}
+
+body.performance-mode .portal,
+body.performance-mode .portrait-orbit,
+body.performance-mode .crystal-orbit,
+body.performance-mode .crystal-seal__orbit,
+body.performance-mode .finale-crystal-orbit,
+body.performance-mode .finale-ring,
+body.performance-mode .finale-portrait-orbit {
+  animation-duration: 24s !important;
+}
+
+body.performance-mode .floating-paper,
+body.performance-mode .decorative-star,
+body.performance-mode .constellation-star__pulse {
+  animation-duration: 4.5s !important;
+}
+
+body.performance-mode .boss-monster {
+  animation-duration: 4s;
+}
+
+@media (max-width: 900px) {
+  body.performance-mode .ambient-glow {
+    opacity: 0.16 !important;
+  }
+}
