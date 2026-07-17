@@ -20,6 +20,114 @@
     },
   };
 
+  const quizData = [
+    {
+      category: "Core abilities",
+      question: "What is Avin’s greatest superpower?",
+      answers: [
+        {
+          label: "Her intelligence",
+          response: "Absolutely. Her brain has carried more information than most cosmic archives.",
+          harmony: 1,
+        },
+        {
+          label: "Her patience",
+          response: "Correct. Dental school tested it repeatedly, and somehow it is still functioning.",
+          harmony: 1,
+        },
+        {
+          label: "Her beautiful smile",
+          response: "A powerful answer. The Guardian of Every Smile should naturally have one of her own.",
+          harmony: 1,
+        },
+        {
+          label: "All of the above",
+          response: "Perfect. Avin’s powers cannot be reduced to a single option.",
+          harmony: 2,
+        },
+      ],
+    },
+    {
+      category: "Energy restoration",
+      question: "Which combination restores Avin’s energy fastest?",
+      answers: [
+        {
+          label: "A mysterious cosmic salad",
+          response: "Healthy, perhaps. But the Avinverse has detected a much more powerful source.",
+          harmony: 0,
+        },
+        {
+          label: "Sate Padang",
+          response: "Excellent choice. Spicy energy levels are rising rapidly.",
+          harmony: 1,
+        },
+        {
+          label: "Indomie goreng",
+          response: "Comfort mode activated. Energy is returning one delicious forkful at a time.",
+          harmony: 1,
+        },
+        {
+          label: "Sate Padang and Indomie goreng",
+          response: "Maximum energy restored. Lord Deadline should start worrying.",
+          harmony: 2,
+        },
+      ],
+    },
+    {
+      category: "Recovery protocol",
+      question: "After a long mission, which portal sounds most like Avin?",
+      answers: [
+        {
+          label: "A Marvel multiverse marathon",
+          response: "An excellent portal. Multiple heroes, multiple universes, zero academic revisions.",
+          harmony: 1,
+        },
+        {
+          label: "An Attack on Titan rewatch",
+          response: "Dramatic, intense, and somehow still more relaxing than final deadlines.",
+          harmony: 1,
+        },
+        {
+          label: "A quiet meal with favorite food",
+          response: "A peaceful universe has been located. Sate Padang may already be waiting there.",
+          harmony: 1,
+        },
+        {
+          label: "All portals, depending on the day",
+          response: "Correct. Even a heroine deserves more than one recovery universe.",
+          harmony: 2,
+        },
+      ],
+    },
+    {
+      category: "Universal pride scan",
+      question: "Who is the proudest of Avin today?",
+      answers: [
+        {
+          label: "Her family",
+          response: "Of course. They have witnessed a beautiful part of this journey.",
+          harmony: 1,
+        },
+        {
+          label: "Her friends",
+          response: "Definitely. Every universe needs people who cheer for its heroine.",
+          harmony: 1,
+        },
+        {
+          label: "Her future patients",
+          response: "They may not know it yet, but they are going to meet a dentist who truly cares.",
+          harmony: 1,
+        },
+        {
+          label: "Ansa — and everyone above",
+          response: "Confirmed. One universe is not large enough to contain everyone who is proud of her.",
+          harmony: 2,
+        },
+      ],
+    },
+  ];
+
+
   const scenes = Array.from(document.querySelectorAll(".scene"));
   const totalScenes = scenes.length;
 
@@ -46,6 +154,26 @@
     backgroundMusic: document.getElementById("backgroundMusic"),
     cosmicCanvas: document.getElementById("cosmicCanvas"),
     toast: document.getElementById("toast"),
+    startQuizButton: document.getElementById("startQuizButton"),
+    quizIntro: document.getElementById("quizIntro"),
+    quizQuestionPanel: document.getElementById("quizQuestionPanel"),
+    quizResult: document.getElementById("quizResult"),
+    quizStepText: document.getElementById("quizStepText"),
+    quizPercentText: document.getElementById("quizPercentText"),
+    quizProgressFill: document.getElementById("quizProgressFill"),
+    quizCategory: document.getElementById("quizCategory"),
+    quizQuestionText: document.getElementById("quizQuestionText"),
+    quizAnswers: document.getElementById("quizAnswers"),
+    quizFeedback: document.getElementById("quizFeedback"),
+    quizFeedbackText: document.getElementById("quizFeedbackText"),
+    quizNextButton: document.getElementById("quizNextButton"),
+    restartQuizButton: document.getElementById("restartQuizButton"),
+    reviewQuizButton: document.getElementById("reviewQuizButton"),
+    collectCrystalButton: document.getElementById("collectCrystalButton"),
+    quizCrystal: document.getElementById("quizCrystal"),
+    crystalStatusText: document.getElementById("crystalStatusText"),
+    crystalStatus: document.querySelector(".crystal-status"),
+    crystalCollectedMessage: document.getElementById("crystalCollectedMessage"),
   };
 
   const state = {
@@ -60,6 +188,11 @@
     toastTimer: null,
     particles: [],
     canvasAnimationId: null,
+    quizQuestionIndex: 0,
+    quizSelectedAnswer: null,
+    quizHarmony: 0,
+    quizCompleted: false,
+    crystalCollected: false,
   };
 
   function applyConfig() {
@@ -224,7 +357,9 @@
     elements.nextButton.disabled = state.currentScene >= totalScenes - 1;
 
     if (state.currentScene === totalScenes - 1) {
-      elements.nextButton.innerHTML = 'Complete <span aria-hidden="true">✦</span>';
+      elements.nextButton.innerHTML = state.crystalCollected
+        ? 'Crystal Collected <span aria-hidden="true">✦</span>'
+        : 'Complete Test <span aria-hidden="true">✦</span>';
     } else {
       elements.nextButton.innerHTML = 'Next <span aria-hidden="true">→</span>';
     }
@@ -240,6 +375,164 @@
         bar.style.width = `${Math.min(100, Math.max(0, value))}%`;
       });
     }, state.reducedMotion ? 0 : 320);
+  }
+
+
+  function setQuizView(viewName) {
+    const views = {
+      intro: elements.quizIntro,
+      question: elements.quizQuestionPanel,
+      result: elements.quizResult,
+    };
+
+    Object.entries(views).forEach(([name, element]) => {
+      const shouldShow = name === viewName;
+      element.hidden = !shouldShow;
+
+      if (shouldShow) {
+        element.classList.remove("is-changing");
+        void element.offsetWidth;
+        element.classList.add("is-changing");
+      }
+    });
+  }
+
+  function startQuiz() {
+    state.quizQuestionIndex = 0;
+    state.quizSelectedAnswer = null;
+    state.quizHarmony = 0;
+    state.quizCompleted = false;
+    state.crystalCollected = false;
+
+    elements.quizCrystal.classList.remove("is-unlocked");
+    elements.crystalStatus.classList.remove("is-unlocked");
+    elements.crystalStatusText.textContent = "Crystal of Determination · Locked";
+    elements.crystalCollectedMessage.hidden = true;
+    elements.collectCrystalButton.disabled = false;
+    elements.collectCrystalButton.innerHTML =
+      'Collect the Crystal <span aria-hidden="true">✦</span>';
+
+    setQuizView("question");
+    renderQuizQuestion();
+    updateNavigation();
+  }
+
+  function renderQuizQuestion() {
+    const question = quizData[state.quizQuestionIndex];
+    const questionNumber = state.quizQuestionIndex + 1;
+    const percent = Math.round((questionNumber / quizData.length) * 100);
+
+    state.quizSelectedAnswer = null;
+
+    elements.quizStepText.textContent =
+      `Question ${questionNumber} of ${quizData.length}`;
+    elements.quizPercentText.textContent = `${percent}%`;
+    elements.quizProgressFill.style.width = `${percent}%`;
+    elements.quizCategory.textContent = question.category;
+    elements.quizQuestionText.textContent = question.question;
+    elements.quizFeedback.hidden = true;
+    elements.quizFeedbackText.textContent = "";
+    elements.quizNextButton.disabled = true;
+    elements.quizNextButton.innerHTML =
+      state.quizQuestionIndex === quizData.length - 1
+        ? 'Reveal Result <span aria-hidden="true">✦</span>'
+        : 'Next Question <span aria-hidden="true">→</span>';
+
+    const fragment = document.createDocumentFragment();
+    const letters = ["A", "B", "C", "D"];
+
+    question.answers.forEach((answer, answerIndex) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "quiz-answer";
+      button.dataset.letter = letters[answerIndex] || String(answerIndex + 1);
+      button.textContent = answer.label;
+      button.addEventListener("click", () => {
+        selectQuizAnswer(answerIndex, button);
+      });
+      fragment.appendChild(button);
+    });
+
+    elements.quizAnswers.replaceChildren(fragment);
+  }
+
+  function selectQuizAnswer(answerIndex, selectedButton) {
+    if (state.quizSelectedAnswer !== null) return;
+
+    const question = quizData[state.quizQuestionIndex];
+    const answer = question.answers[answerIndex];
+    state.quizSelectedAnswer = answerIndex;
+    state.quizHarmony += answer.harmony;
+
+    Array.from(elements.quizAnswers.children).forEach((button) => {
+      button.disabled = true;
+      button.classList.toggle("is-selected", button === selectedButton);
+    });
+
+    elements.quizFeedbackText.textContent = answer.response;
+    elements.quizFeedback.hidden = false;
+    elements.quizNextButton.disabled = false;
+  }
+
+  function advanceQuiz() {
+    if (state.quizSelectedAnswer === null) return;
+
+    if (state.quizQuestionIndex < quizData.length - 1) {
+      state.quizQuestionIndex += 1;
+      elements.quizQuestionPanel.classList.remove("is-changing");
+      void elements.quizQuestionPanel.offsetWidth;
+      elements.quizQuestionPanel.classList.add("is-changing");
+      renderQuizQuestion();
+      return;
+    }
+
+    finishQuiz();
+  }
+
+  function finishQuiz() {
+    state.quizCompleted = true;
+    elements.quizCrystal.classList.add("is-unlocked");
+    elements.crystalStatus.classList.add("is-unlocked");
+    elements.crystalStatusText.textContent =
+      "Crystal of Determination · Unlocked";
+
+    setQuizView("result");
+    updateNavigation();
+    showToast("Compatibility confirmed: 100% ✦");
+  }
+
+  function collectCrystal() {
+    if (!state.quizCompleted || state.crystalCollected) return;
+
+    state.crystalCollected = true;
+    elements.collectCrystalButton.disabled = true;
+    elements.collectCrystalButton.innerHTML =
+      'Crystal Collected <span aria-hidden="true">✓</span>';
+    elements.crystalCollectedMessage.hidden = false;
+    elements.crystalStatusText.textContent =
+      "Crystal of Determination · Safely Stored";
+
+    updateNavigation();
+    showToast("Crystal of Determination added to the Avinverse.");
+  }
+
+  function resetQuizToIntro() {
+    state.quizQuestionIndex = 0;
+    state.quizSelectedAnswer = null;
+    state.quizHarmony = 0;
+    state.quizCompleted = false;
+    state.crystalCollected = false;
+
+    elements.quizCrystal.classList.remove("is-unlocked");
+    elements.crystalStatus.classList.remove("is-unlocked");
+    elements.crystalStatusText.textContent = "Crystal of Determination · Locked";
+    elements.crystalCollectedMessage.hidden = true;
+    elements.collectCrystalButton.disabled = false;
+    elements.collectCrystalButton.innerHTML =
+      'Collect the Crystal <span aria-hidden="true">✦</span>';
+
+    setQuizView("intro");
+    updateNavigation();
   }
 
   function goToScene(targetIndex, options = {}) {
@@ -456,7 +749,11 @@
 
     elements.nextButton.addEventListener("click", () => {
       if (state.currentScene >= totalScenes - 1) {
-        showToast("Foundation complete. Next: The Avin Compatibility Test.");
+        showToast(
+          state.crystalCollected
+            ? "Crystal safely stored. Next mission: Defeat Lord Deadline."
+            : "Complete the compatibility test to unlock the crystal."
+        );
         return;
       }
 
@@ -473,6 +770,12 @@
     });
 
     elements.motionButton.addEventListener("click", toggleMotion);
+
+    elements.startQuizButton.addEventListener("click", startQuiz);
+    elements.quizNextButton.addEventListener("click", advanceQuiz);
+    elements.restartQuizButton.addEventListener("click", resetQuizToIntro);
+    elements.reviewQuizButton.addEventListener("click", startQuiz);
+    elements.collectCrystalButton.addEventListener("click", collectCrystal);
 
     document.addEventListener("keydown", (event) => {
       if (!state.hasEntered) {
@@ -504,6 +807,13 @@
       "touchstart",
       (event) => {
         if (!state.hasEntered || event.touches.length !== 1) return;
+
+        if (event.target.closest(".quiz-card")) {
+          state.touchStartX = 0;
+          state.touchStartY = 0;
+          return;
+        }
+
         state.touchStartX = event.touches[0].clientX;
         state.touchStartY = event.touches[0].clientY;
       },
@@ -514,6 +824,7 @@
       "touchend",
       (event) => {
         if (!state.hasEntered || event.changedTouches.length !== 1) return;
+        if (state.touchStartX === 0 && state.touchStartY === 0) return;
 
         const deltaX = event.changedTouches[0].clientX - state.touchStartX;
         const deltaY = event.changedTouches[0].clientY - state.touchStartY;

@@ -262,15 +262,151 @@
 
         <div class="phase-complete glass-panel">
           <span class="phase-complete__icon" aria-hidden="true">✦</span>
-          <div>
-            <p class="eyebrow">Foundation complete</p>
-            <h3>The next universe is ready.</h3>
+          <div class="phase-complete__copy">
+            <p class="eyebrow">New universe detected</p>
+            <h3>The Avin Compatibility Test is ready.</h3>
             <p>
-              Pada tahap berikutnya, bagian ini akan terhubung ke
-              <strong>The Avin Compatibility Test</strong>.
+              Empat pertanyaan ringan untuk mengukur seberapa baik semesta ini
+              memahami dokter gigi favoritnya.
             </p>
           </div>
+          <button class="primary-button js-next-scene phase-complete__button" type="button">
+            Begin the Test
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
+      </div>
+    </section>
+
+    <!-- SCENE 5: AVIN COMPATIBILITY TEST -->
+    <section class="scene scene--quiz" data-scene="4" aria-labelledby="quizSceneTitle" hidden>
+      <div class="scene-inner quiz-layout">
+        <aside class="quiz-side">
+          <p class="eyebrow">Avinverse assessment · 04 questions</p>
+          <h2 id="quizSceneTitle">The Avin<br />Compatibility Test</h2>
+          <p class="quiz-side__description">
+            Tidak ada jawaban yang benar-benar salah. Semesta hanya ingin
+            memastikan bahwa fakta-fakta terpenting tentang Avin tersimpan
+            dengan aman.
+          </p>
+
+          <div class="crystal-display" aria-hidden="true">
+            <div class="crystal-aura"></div>
+            <div class="crystal-orbit crystal-orbit--one"></div>
+            <div class="crystal-orbit crystal-orbit--two"></div>
+            <div id="quizCrystal" class="quiz-crystal">
+              <span class="crystal-facet crystal-facet--left"></span>
+              <span class="crystal-facet crystal-facet--center"></span>
+              <span class="crystal-facet crystal-facet--right"></span>
+              <span class="crystal-shine"></span>
+            </div>
+          </div>
+
+          <div class="crystal-status glass-panel">
+            <span class="crystal-status__dot" aria-hidden="true"></span>
+            <div>
+              <small>REWARD</small>
+              <strong id="crystalStatusText">Crystal of Determination · Locked</strong>
+            </div>
+          </div>
+        </aside>
+
+        <article class="quiz-card glass-panel">
+          <!-- Quiz intro -->
+          <div id="quizIntro" class="quiz-view quiz-view--intro">
+            <span class="quiz-symbol" aria-hidden="true">✦</span>
+            <p class="eyebrow">Identity calibration</p>
+            <h3>How well does this universe understand Avin?</h3>
+            <p>
+              Jawab berdasarkan insting. Setiap pilihan akan membuka respons
+              kecil dari Avinverse, lalu kristal akan terbentuk setelah seluruh
+              pertanyaan diselesaikan.
+            </p>
+
+            <div class="quiz-rules">
+              <span><strong>4</strong> questions</span>
+              <span><strong>0</strong> wrong answers</span>
+              <span><strong>1</strong> crystal reward</span>
+            </div>
+
+            <button id="startQuizButton" class="primary-button" type="button">
+              Start Compatibility Test
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <!-- Active question -->
+          <div id="quizQuestionPanel" class="quiz-view quiz-view--question" hidden>
+            <div class="quiz-progress-header">
+              <span id="quizStepText">Question 1 of 4</span>
+              <span id="quizPercentText">25%</span>
+            </div>
+
+            <div class="quiz-progress-track" aria-hidden="true">
+              <span id="quizProgressFill"></span>
+            </div>
+
+            <div class="quiz-question-copy">
+              <p id="quizCategory" class="quiz-category">Avin archives</p>
+              <h3 id="quizQuestionText">Question text</h3>
+            </div>
+
+            <div id="quizAnswers" class="quiz-answers" role="group" aria-label="Pilihan jawaban"></div>
+
+            <div id="quizFeedback" class="quiz-feedback" role="status" aria-live="polite" hidden>
+              <span id="quizFeedbackIcon" aria-hidden="true">✦</span>
+              <p id="quizFeedbackText"></p>
+            </div>
+
+            <div class="quiz-question-actions">
+              <button id="restartQuizButton" class="text-button" type="button">
+                Restart test
+              </button>
+              <button id="quizNextButton" class="primary-button" type="button" disabled>
+                Next Question
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quiz result -->
+          <div id="quizResult" class="quiz-view quiz-view--result" hidden>
+            <div class="result-sparkles" aria-hidden="true">
+              <span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span>
+            </div>
+
+            <div class="result-crystal-mini" aria-hidden="true">◆</div>
+            <p class="eyebrow">Assessment complete</p>
+            <h3>Compatibility with the Avinverse: 100%</h3>
+            <p id="quizResultMessage">
+              This universe remembers the important things: her kindness,
+              determination, favorite comfort food, and all the reasons she
+              deserves to be celebrated.
+            </p>
+
+            <div class="result-certificate">
+              <span>CRYSTAL UNLOCKED</span>
+              <strong>Crystal of Determination</strong>
+              <small>Awarded to drg. Avin · 18 July 2026</small>
+            </div>
+
+            <div class="quiz-result-actions">
+              <button id="reviewQuizButton" class="secondary-button secondary-button--labeled" type="button">
+                <span aria-hidden="true">↺</span>
+                Play Again
+              </button>
+              <button id="collectCrystalButton" class="primary-button" type="button">
+                Collect the Crystal
+                <span aria-hidden="true">✦</span>
+              </button>
+            </div>
+
+            <p id="crystalCollectedMessage" class="crystal-collected-message" hidden>
+              Crystal safely stored in the Avinverse.
+              The next mission will be <strong>Defeat Lord Deadline</strong>.
+            </p>
+          </div>
+        </article>
       </div>
     </section>
   </main>

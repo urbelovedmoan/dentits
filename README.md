@@ -12,6 +12,8 @@ Versi ini sudah berisi:
 - Portal opening
 - Hero reveal
 - Character profile
+- The Avin Compatibility Test
+- Crystal of Determination reward
 - Navigasi antarscene
 - Tombol musik
 - Mode animasi ringan
@@ -148,10 +150,24 @@ avinverse-starter/
     └── sounds/
 ```
 
+## Tahap terbaru
+
+Scene **The Avin Compatibility Test** telah ditambahkan.
+
+Fitur kuis:
+
+- Empat pertanyaan personal
+- Respons berbeda untuk setiap pilihan
+- Progress pertanyaan
+- Tidak ada jawaban yang membuat pengguna gagal
+- Hadiah **Crystal of Determination**
+- Tombol mengulang kuis
+- Mendukung klik, keyboard umum, dan layar sentuh
+
 ## Tahap berikutnya
 
-Scene berikut yang akan ditambahkan:
+Scene yang akan ditambahkan berikutnya:
 
-**The Avin Compatibility Test**
+**Defeat Lord Deadline**
 
-Kuis akan terhubung dengan progress, respons lucu, skor internal, dan hadiah berupa **Crystal of Determination**.
+Mini-game ini akan menggunakan kartu kekuatan Avin, health bar, tiga ronde singkat, serta hadiah **Crystal of Courage**.
