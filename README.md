@@ -388,3 +388,26 @@ This revision adds:
 
 The clipping problem was a CSS layout issue, not a RAM failure. RAM and browser
 choice mainly affect animation smoothness.
+
+
+## Mobile performance-mode logic revision
+
+Automatic performance mode now applies only to desktop or laptop browsers.
+
+Rules:
+
+- Firefox desktop: enabled automatically.
+- Desktop Chrome/Edge on devices reporting <=4 GB memory: enabled.
+- Desktop browsers on devices reporting <=4 logical processors: enabled.
+- Android browsers: not enabled automatically.
+- iPhone and iPad browsers: not enabled automatically.
+- iPadOS desktop-website mode is also treated as mobile.
+- Reduce Motion remains available manually on every device.
+
+To check the active state in the browser console:
+
+```javascript
+document.body.classList.contains("performance-mode")
+```
+
+`true` means performance mode is active.

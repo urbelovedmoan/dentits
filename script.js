@@ -335,14 +335,49 @@
   function detectPerformanceMode() {
     const userAgent = navigator.userAgent || "";
     const isFirefox = /firefox/i.test(userAgent);
+
+    const browserReportsMobile = Boolean(
+      navigator.userAgentData?.mobile
+    );
+
+    const isMobileUserAgent =
+      /Android|iPhone|iPad|iPod|Mobile/i.test(userAgent);
+
+    // iPadOS can identify itself as macOS when "Request Desktop Website"
+    // is enabled, so touch capability is used as an additional check.
+    const isIPadDesktopMode =
+      navigator.platform === "MacIntel" &&
+      navigator.maxTouchPoints > 1;
+
+    const isMobile =
+      browserReportsMobile ||
+      isMobileUserAgent ||
+      isIPadDesktopMode;
+
     const deviceMemory = Number(navigator.deviceMemory || 0);
-    const logicalProcessors = Number(navigator.hardwareConcurrency || 0);
+    const logicalProcessors = Number(
+      navigator.hardwareConcurrency || 0
+    );
 
-    const lowMemory = deviceMemory > 0 && deviceMemory <= 4;
-    const limitedCpu = logicalProcessors > 0 && logicalProcessors <= 4;
+    const lowMemory =
+      deviceMemory > 0 &&
+      deviceMemory <= 4;
 
-    state.performanceMode = isFirefox || lowMemory || limitedCpu;
-    document.body.classList.toggle("performance-mode", state.performanceMode);
+    const limitedCpu =
+      logicalProcessors > 0 &&
+      logicalProcessors <= 4;
+
+    // Automatic performance mode is intentionally desktop-only.
+    // Mobile users keep the full visual experience unless they manually
+    // enable Reduce Motion from the header control.
+    state.performanceMode =
+      !isMobile &&
+      (isFirefox || lowMemory || limitedCpu);
+
+    document.body.classList.toggle(
+      "performance-mode",
+      state.performanceMode
+    );
   }
 
   function applyConfig() {
