@@ -1,5 +1,3 @@
-Letakkan empat foto Avin di folder ini dengan nama:
-memory-1.jpg
-memory-2.jpg
-memory-3.jpg
-memory-4.jpg
+Journey Shards tidak lagi membutuhkan memory-1.jpg sampai memory-4.jpg.
+File ini dipertahankan hanya agar struktur GitHub lama tidak membingungkan.
+Anda boleh membiarkannya di repository; website tidak menggunakannya.

@@ -25,15 +25,15 @@ Panduan ini menunjukkan lokasi setiap kelompok kata atau kalimat di dalam proyek
 | Judul dan petunjuk statis kuis | `index.html` | `SCENE 5: AVIN COMPATIBILITY TEST` |
 | Nama kartu, damage, dan respons Lord Deadline | `script.js` | `const battleRounds =` |
 | Judul dan teks statis boss battle | `index.html` | `SCENE 6: DEFEAT LORD DEADLINE` |
-| Judul dan teks statis Memory Shards | `index.html` | `SCENE 7: MEMORY SHARDS` |
-| Judul, caption, dan nama empat foto | `memory.js` | `const memories =` |
+| Judul dan teks statis Journey Shards | `index.html` | `SCENE 7: MEMORY SHARDS` |
+| Judul, caption, dan nama empat milestone perjalanan | `memory.js` | `const memories =` |
 | Judul dan teks statis konstelasi | `index.html` | `SCENE 8: CONSTELLATION OF EVERY SMILE` |
 | Lima pesan bintang | `constellation.js` | `const starMessages =` |
 | Pengantar dan teks tombol Secret Letter | `index.html` | `SCENE 9: SECRET LETTER` |
 | Seluruh isi surat dari Ansa | `index.html` | `id="letterPaper"` |
 | Semua kalimat finale | `index.html` | `SCENE 10: CINEMATIC GRADUATION FINALE` |
 | Nama file foto utama | `index.html` | `assets/photos/hero.jpg` |
-| Nama file empat foto galeri | `memory.js` dan `index.html` | `memory-1.jpg` |
+| Nama file empat milestone perjalanan galeri | `memory.js` dan `index.html` | `Journey Shard 1` |
 | Nama file musik | `index.html` | `background-music.mp3` |
 
 ## 1. Data utama
@@ -166,7 +166,7 @@ Anda dapat mengganti:
 
 Sebaiknya jangan mengubah `damage`, `icon`, atau `color` sebelum seluruh game selesai diuji kembali.
 
-## 6. Memory Shards
+## 6. Journey Shards
 
 Buka `memory.js`, cari:
 
@@ -178,8 +178,8 @@ Setiap foto memiliki:
 
 ```javascript
 {
-  src: "assets/photos/memory-1.jpg",
-  file: "memory-1.jpg",
+  src: "assets/photos/Journey Shard 1",
+  file: "Journey Shard 1",
   kicker: "The Beginning",
   title: "A beautiful story was already unfolding.",
   caption: "Maybe this photo...",
@@ -274,7 +274,7 @@ Teks tombol dan status biasanya berada langsung di `index.html`. Cara tercepat a
 ```text
 Enter the Avinverse
 Open the Portal
-Collect Crystal of Memories
+Collect Crystal of Journey
 Connect the Stars
 Keep This Message
 Start the Celebration
@@ -353,3 +353,17 @@ Di bagian ini Anda bisa:
 - mengubah nama label Taurus
 - memindahkan posisi titik (`.dot-1`, `.dot-2`, dst.)
 - mengubah bentuk garis SVG Taurus di `index.html`
+
+
+## Revisi audit terbaru
+
+Perbaikan yang sudah diterapkan:
+
+- Menghapus baris HTML rusak di Journey Shards
+- Mencegah judul AVINVERSE melebar keluar layar ponsel
+- Menjaga animasi Taurus tetap tampil pada Android desktop mode
+- Membuat pola Taurus lebih mudah dikenali
+- Mengecilkan judul modal Journey Shards pada ponsel
+- Menambah ruang aman di atas navigasi bawah
+- Mengganti label aksesibilitas “foto” menjadi “journey fragment”
+- Membersihkan instruksi lama mengenai empat foto memory

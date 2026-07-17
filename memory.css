@@ -710,9 +710,9 @@ body.memory-modal-open { overflow: hidden; }
   }
 
   .memory-modal__journey-wrap {
-    width: min(72vw,310px);
-    height: min(54vh,455px);
-    min-height: 340px;
+    width: min(70vw,300px);
+    height: min(44vh,390px);
+    min-height: 300px;
     padding: 20px;
   }
 
@@ -729,7 +729,7 @@ body.memory-modal-open { overflow: hidden; }
   .memory-modal__nav--next { right: 8px; }
 
   .memory-modal__copy { padding: 24px 22px 28px; }
-  .memory-modal__copy h2 { font-size: clamp(2.6rem,14vw,4rem); }
+  .memory-modal__copy h2 { font-size: clamp(2.3rem,10.5vw,3.4rem); line-height: .96; }
   .memory-modal__copy > p:not(.eyebrow) { font-size: 1.18rem; }
 }
 

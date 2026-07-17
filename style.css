@@ -377,23 +377,38 @@ strong {
   text-transform: uppercase;
 }
 
-.mini-constellation--taurus path:first-of-type {
+.mini-constellation--taurus path:nth-of-type(1) {
   animation-duration: 3.2s;
 }
 
-.mini-constellation--taurus path:last-of-type {
-  animation-delay: 900ms;
+.mini-constellation--taurus path:nth-of-type(2) {
+  animation-delay: 700ms;
   animation-duration: 2.4s;
 }
 
-.dot-1 { left: 9%; top: 56%; }
-.dot-2 { left: 27%; top: 42%; }
-.dot-3 { left: 46%; top: 22%; }
-.dot-4 { left: 47%; top: 55%; }
-.dot-5 { left: 33%; top: 77%; }
-.dot-6 { left: 69%; top: 62%; }
-.dot-7 { left: 79%; top: 73%; }
-.dot-8 { left: 60%; top: 12%; }
+.mini-constellation--taurus path:nth-of-type(3) {
+  animation-delay: 1.25s;
+  animation-duration: 1.8s;
+}
+
+.constellation-dot--aldebaran {
+  width: 12px;
+  height: 12px;
+  background: #f1cc8a;
+  box-shadow:
+    0 0 0 6px rgba(231, 198, 128, 0.12),
+    0 0 30px rgba(241, 204, 138, 0.95);
+}
+
+.dot-1 { left: 11%; top: 16%; }
+.dot-2 { left: 25.5%; top: 31%; }
+.dot-3 { left: 36%; top: 56%; }
+.dot-4 { left: 50%; top: 75%; }
+.dot-5 { left: 64%; top: 56%; }
+.dot-6 { left: 74.5%; top: 31%; }
+.dot-7 { left: 89%; top: 16%; }
+.dot-8 { left: 50%; top: 45%; }
+.dot-9 { left: 50%; top: 88%; }
 
 @media (max-width: 640px) {
   .mini-constellation--taurus {

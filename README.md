@@ -204,22 +204,22 @@ Fitur galeri:
 - Progress arsip 0–100%
 - Status foto yang sudah dibuka
 - Tombol reset archive
-- Hadiah **Crystal of Memories**
+- Hadiah **Crystal of Journey**
 
-## Memasang empat foto
+## Memasang empat milestone perjalanan
 
 Simpan foto dengan nama berikut:
 
 ```text
-assets/photos/memory-1.jpg
-assets/photos/memory-2.jpg
-assets/photos/memory-3.jpg
-assets/photos/memory-4.jpg
+assets/photos/Journey Shard 1
+assets/photos/Journey Shard 2
+assets/photos/Journey Shard 3
+assets/photos/Journey Shard 4
 ```
 
-Foto portrait paling ideal, tetapi foto landscape tetap dipotong otomatis.
+Journey Shards tidak membutuhkan file foto tambahan.
 
-## Mengubah caption foto
+## Mengubah teks Journey Shards
 
 Buka `memory.js`, lalu edit bagian:
 
@@ -350,7 +350,7 @@ galeri, konstelasi, surat, dan finale.
 
 Perubahan tambahan:
 
-- Scene **Memory Shards** diganti menjadi **Journey Shards**
+- Scene **Journey Shards** diganti menjadi **Journey Shards**
 - Tidak membutuhkan foto lagi pada scene tersebut
 - Setiap shard sekarang berisi milestone perjalanan Avin
 - Animasi opening constellation sekarang membentuk **Taurus**
@@ -359,3 +359,17 @@ Perubahan tambahan:
 
 - Ubah isi empat Journey Shards di `memory.js`
 - Ubah bentuk dan label Taurus opening di `index.html` dan `style.css`
+
+
+## Revisi audit terbaru
+
+Perbaikan yang sudah diterapkan:
+
+- Menghapus baris HTML rusak di Journey Shards
+- Mencegah judul AVINVERSE melebar keluar layar ponsel
+- Menjaga animasi Taurus tetap tampil pada Android desktop mode
+- Membuat pola Taurus lebih mudah dikenali
+- Mengecilkan judul modal Journey Shards pada ponsel
+- Menambah ruang aman di atas navigasi bawah
+- Mengganti label aksesibilitas “foto” menjadi “journey fragment”
+- Membersihkan instruksi lama mengenai empat foto memory

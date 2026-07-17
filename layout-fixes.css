@@ -273,9 +273,6 @@
 
 /* Very short landscape screens, commonly Android desktop mode. */
 @media (max-height: 520px) {
-  .scene--loading .mini-constellation {
-    display: none;
-  }
 
   .scene--loading .opening-copy {
     margin-top: 2px;
@@ -426,5 +423,56 @@
   .finale-actions .secondary-button {
     min-height: 42px;
     padding-block: 8px;
+  }
+}
+
+
+/* ------------------------------------------------------------
+   Post-audit responsive and accessibility fixes
+   ------------------------------------------------------------ */
+
+/* Prevent fixed bottom navigation from covering the final content of scenes. */
+.scene:not(.scene--loading) .scene-inner {
+  padding-bottom: max(
+    145px,
+    calc(var(--nav-height) + env(safe-area-inset-bottom) + 50px)
+  );
+}
+
+/* Prevent long opening text and loader values from creating horizontal overflow. */
+.scene--loading .brand-title {
+  max-width: 100%;
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+
+.scene--loading .loader {
+  grid-template-columns: minmax(0, 1fr) 40px;
+  max-width: 100%;
+}
+
+.scene--loading .loader-value {
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Standard phone correction for AVINVERSE width. */
+@media (max-width: 640px) {
+  .scene--loading .brand-title {
+    font-size: clamp(3rem, 14.5vw, 4.2rem);
+    letter-spacing: 0.015em;
+  }
+}
+
+/* Keep the personalized Taurus constellation visible on short landscape screens. */
+@media (max-height: 520px) {
+  .scene--loading .mini-constellation {
+    display: block;
+    width: min(160px, 29vh);
+    margin-bottom: -8px;
+  }
+
+  .scene--loading .constellation-label {
+    display: none;
   }
 }
