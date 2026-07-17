@@ -14,6 +14,8 @@ Versi ini sudah berisi:
 - Character profile
 - The Avin Compatibility Test
 - Crystal of Determination reward
+- Defeat Lord Deadline mini-game
+- Crystal of Courage reward
 - Navigasi antarscene
 - Tombol musik
 - Mode animasi ringan
@@ -164,10 +166,27 @@ Fitur kuis:
 - Tombol mengulang kuis
 - Mendukung klik, keyboard umum, dan layar sentuh
 
+## Tahap terbaru
+
+Scene **Defeat Lord Deadline** telah ditambahkan.
+
+Fitur mini-game:
+
+- Tiga ronde singkat
+- Tidak ada kemungkinan kalah
+- Sembilan kartu kekuatan unik
+- Health bar dan animasi serangan
+- Respons berbeda untuk setiap kekuatan
+- Tombol skip battle
+- Tombol replay
+- Hadiah **Crystal of Courage**
+- Mendukung mouse dan layar sentuh
+
 ## Tahap berikutnya
 
-Scene yang akan ditambahkan berikutnya:
+Scene berikutnya adalah:
 
-**Defeat Lord Deadline**
+**Memory Shards**
 
-Mini-game ini akan menggunakan kartu kekuatan Avin, health bar, tiga ronde singkat, serta hadiah **Crystal of Courage**.
+Empat foto akan ditampilkan sebagai portal kristal. Setiap foto dapat dibuka,
+diperbesar, digeser di ponsel, dan diberi caption personal.

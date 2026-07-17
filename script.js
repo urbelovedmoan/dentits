@@ -128,6 +128,103 @@
   ];
 
 
+  const battleRounds = [
+    {
+      title: "The First Revision",
+      bossLine: "“This only needs a few tiny changes.”",
+      hint: "Round one: academic powers.",
+      powers: [
+        {
+          name: "Patience Beam",
+          icon: "◌",
+          damage: 27,
+          color: "#bca7ff",
+          description: "Converts every patiently handled revision into focused energy.",
+          feedback: "Patience Beam activated. Years of calm persistence have been converted into pure cosmic damage.",
+        },
+        {
+          name: "Clinical Knowledge",
+          icon: "✦",
+          damage: 30,
+          color: "#9fe7ef",
+          description: "A precise attack powered by everything Avin has learned.",
+          feedback: "A clinically precise hit. Lord Deadline has no evidence-based defense against this much knowledge.",
+        },
+        {
+          name: "Support System",
+          icon: "♡",
+          damage: 28,
+          color: "#f6a6cd",
+          description: "Channels strength from family, friends, and people who believe in her.",
+          feedback: "Support energy received from multiple universes. The boss suddenly feels very outnumbered.",
+        },
+      ],
+    },
+    {
+      title: "The Energy Crisis",
+      bossLine: "“The deadline is tomorrow morning.”",
+      hint: "Round two: restore energy.",
+      powers: [
+        {
+          name: "Indomie Goreng Boost",
+          icon: "≈",
+          damage: 31,
+          color: "#e7c680",
+          description: "Instant comfort energy with a suspiciously powerful aroma.",
+          feedback: "Comfort mode activated. Energy restored, mood improved, and the deadline has lost confidence.",
+        },
+        {
+          name: "Sate Padang Ultimate",
+          icon: "♨",
+          damage: 34,
+          color: "#f0a16f",
+          description: "A spicy ultimate attack with an immeasurable sauce multiplier.",
+          feedback: "Critical spicy damage. Lord Deadline was emotionally unprepared for the sauce multiplier.",
+        },
+        {
+          name: "Multiverse Assist",
+          icon: "◎",
+          damage: 32,
+          color: "#c8a9ff",
+          description: "Summons countless heroic versions of Avin from nearby universes.",
+          feedback: "Multiple Avins have entered the battlefield. None of them are willing to accept another revision.",
+        },
+      ],
+    },
+    {
+      title: "The Final Submission",
+      bossLine: "“Are you sure this is the final version?”",
+      hint: "Final round: choose the finishing power.",
+      powers: [
+        {
+          name: "Avin’s Determination",
+          icon: "◆",
+          damage: 100,
+          color: "#e7c680",
+          description: "The same force that carried her through the entire journey.",
+          feedback: "Determination exceeded the instrument’s measurement range. Final submission confirmed.",
+        },
+        {
+          name: "Guardian of Every Smile",
+          icon: "✧",
+          damage: 100,
+          color: "#9fe7ef",
+          description: "Transforms her purpose as a dentist into a radiant finishing move.",
+          feedback: "The battlefield is filled with brighter smiles. Lord Deadline has officially lost its purpose.",
+        },
+        {
+          name: "Ansa’s Proud Support",
+          icon: "♡",
+          damage: 100,
+          color: "#f6a6cd",
+          description: "A final boost powered by someone who is endlessly proud of Avin.",
+          feedback: "Pride levels reached infinity. The boss has been defeated across every known universe.",
+        },
+      ],
+    },
+  ];
+
+
   const scenes = Array.from(document.querySelectorAll(".scene"));
   const totalScenes = scenes.length;
 
@@ -174,6 +271,34 @@
     crystalStatusText: document.getElementById("crystalStatusText"),
     crystalStatus: document.querySelector(".crystal-status"),
     crystalCollectedMessage: document.getElementById("crystalCollectedMessage"),
+    continueToGameButton: document.getElementById("continueToGameButton"),
+    battleIntro: document.getElementById("battleIntro"),
+    battleActive: document.getElementById("battleActive"),
+    battleVictory: document.getElementById("battleVictory"),
+    startBattleButton: document.getElementById("startBattleButton"),
+    skipBattleButton: document.getElementById("skipBattleButton"),
+    battleRestartButton: document.getElementById("battleRestartButton"),
+    replayBattleButton: document.getElementById("replayBattleButton"),
+    collectCourageButton: document.getElementById("collectCourageButton"),
+    battleRoundLabel: document.getElementById("battleRoundLabel"),
+    battleRoundTitle: document.getElementById("battleRoundTitle"),
+    bossSpeech: document.getElementById("bossSpeech"),
+    bossMonster: document.getElementById("bossMonster"),
+    battleArena: document.getElementById("battleArena"),
+    battleEffects: document.getElementById("battleEffects"),
+    bossHealthValue: document.getElementById("bossHealthValue"),
+    bossHealthFill: document.getElementById("bossHealthFill"),
+    powerPrompt: document.getElementById("powerPrompt"),
+    roundHint: document.getElementById("roundHint"),
+    powerCards: document.getElementById("powerCards"),
+    battleFeedback: document.getElementById("battleFeedback"),
+    battleFeedbackTitle: document.getElementById("battleFeedbackTitle"),
+    battleFeedbackText: document.getElementById("battleFeedbackText"),
+    battleNextButton: document.getElementById("battleNextButton"),
+    courageInventory: document.getElementById("courageInventory"),
+    courageInventoryStatus: document.getElementById("courageInventoryStatus"),
+    determinationInventoryStatus: document.getElementById("determinationInventoryStatus"),
+    courageCollectedMessage: document.getElementById("courageCollectedMessage"),
   };
 
   const state = {
@@ -193,6 +318,12 @@
     quizHarmony: 0,
     quizCompleted: false,
     crystalCollected: false,
+    battleRoundIndex: 0,
+    bossHealth: 100,
+    battleSelectedPower: null,
+    battleCompleted: false,
+    courageCollected: false,
+    battleSkipped: false,
   };
 
   function applyConfig() {
@@ -357,8 +488,12 @@
     elements.nextButton.disabled = state.currentScene >= totalScenes - 1;
 
     if (state.currentScene === totalScenes - 1) {
+      elements.nextButton.innerHTML = state.courageCollected
+        ? 'Courage Stored <span aria-hidden="true">✦</span>'
+        : 'Defeat the Boss <span aria-hidden="true">⚔</span>';
+    } else if (state.currentScene === 4) {
       elements.nextButton.innerHTML = state.crystalCollected
-        ? 'Crystal Collected <span aria-hidden="true">✦</span>'
+        ? 'Face the Boss <span aria-hidden="true">→</span>'
         : 'Complete Test <span aria-hidden="true">✦</span>';
     } else {
       elements.nextButton.innerHTML = 'Next <span aria-hidden="true">→</span>';
@@ -532,6 +667,270 @@
       'Collect the Crystal <span aria-hidden="true">✦</span>';
 
     setQuizView("intro");
+    updateNavigation();
+  }
+
+
+  function setBattleView(viewName) {
+    const views = {
+      intro: elements.battleIntro,
+      active: elements.battleActive,
+      victory: elements.battleVictory,
+    };
+
+    Object.entries(views).forEach(([name, element]) => {
+      const shouldShow = name === viewName;
+      element.hidden = !shouldShow;
+
+      if (shouldShow) {
+        element.classList.remove("is-changing");
+        void element.offsetWidth;
+        element.classList.add("is-changing");
+      }
+    });
+  }
+
+  function resetBossVisual() {
+    elements.bossMonster.classList.remove("is-hit", "is-defeated");
+    elements.battleArena.classList.remove("is-shaking");
+    elements.battleEffects.replaceChildren();
+  }
+
+  function updateBattleHealth() {
+    const safeHealth = Math.max(0, Math.min(100, Math.round(state.bossHealth)));
+    elements.bossHealthFill.style.width = `${safeHealth}%`;
+    elements.bossHealthValue.textContent = `${safeHealth} / 100`;
+  }
+
+  function startBattle() {
+    state.battleRoundIndex = 0;
+    state.bossHealth = 100;
+    state.battleSelectedPower = null;
+    state.battleCompleted = false;
+    state.courageCollected = false;
+    state.battleSkipped = false;
+
+    resetBossVisual();
+    updateBattleHealth();
+
+    elements.courageInventory.classList.add("inventory-item--locked");
+    elements.courageInventory.classList.remove("is-unlocked");
+    elements.courageInventoryStatus.textContent = "Locked by Lord Deadline";
+    elements.courageCollectedMessage.hidden = true;
+    elements.collectCourageButton.disabled = false;
+    elements.collectCourageButton.innerHTML =
+      'Collect Crystal of Courage <span aria-hidden="true">✦</span>';
+
+    setBattleView("active");
+    renderBattleRound();
+    updateNavigation();
+  }
+
+  function renderBattleRound() {
+    const round = battleRounds[state.battleRoundIndex];
+    const roundNumber = state.battleRoundIndex + 1;
+
+    state.battleSelectedPower = null;
+    resetBossVisual();
+
+    elements.battleRoundLabel.textContent =
+      `Round ${roundNumber} of ${battleRounds.length}`;
+    elements.battleRoundTitle.textContent = round.title;
+    elements.bossSpeech.textContent = round.bossLine;
+    elements.powerPrompt.textContent =
+      roundNumber === battleRounds.length
+        ? "Choose the finishing power."
+        : "Select one card to attack.";
+    elements.roundHint.textContent = round.hint;
+    elements.battleFeedback.hidden = true;
+    elements.battleFeedbackTitle.textContent = "";
+    elements.battleFeedbackText.textContent = "";
+    elements.battleNextButton.disabled = true;
+    elements.battleNextButton.innerHTML =
+      roundNumber === battleRounds.length
+        ? 'Claim Victory <span aria-hidden="true">✦</span>'
+        : `Continue to Round ${roundNumber + 1} <span aria-hidden="true">→</span>`;
+
+    const fragment = document.createDocumentFragment();
+
+    round.powers.forEach((power, powerIndex) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "power-card";
+      button.style.setProperty("--power-color", power.color);
+      button.style.setProperty("--power-glow", `${power.color}33`);
+      button.innerHTML = `
+        <span class="power-card__top">
+          <span class="power-card__icon" aria-hidden="true">${power.icon}</span>
+          <span class="power-card__damage">${
+            state.battleRoundIndex === battleRounds.length - 1
+              ? "FINISHER"
+              : `DMG ${power.damage}`
+          }</span>
+        </span>
+        <strong>${power.name}</strong>
+        <small>${power.description}</small>
+      `;
+      button.addEventListener("click", () => {
+        selectBattlePower(powerIndex, button);
+      });
+      fragment.appendChild(button);
+    });
+
+    elements.powerCards.replaceChildren(fragment);
+  }
+
+  function createBattleAttack(power, damage) {
+    const attack = document.createElement("span");
+    attack.className = "attack-streak";
+    attack.style.setProperty("--attack-color", power.color);
+
+    const damageNumber = document.createElement("span");
+    damageNumber.className = "damage-number";
+    damageNumber.textContent =
+      state.battleRoundIndex === battleRounds.length - 1
+        ? "FINAL!"
+        : `−${damage}`;
+
+    elements.battleEffects.append(attack, damageNumber);
+
+    window.setTimeout(() => {
+      elements.bossMonster.classList.add("is-hit");
+      elements.battleArena.classList.add("is-shaking");
+
+      if ("vibrate" in navigator) {
+        navigator.vibrate?.(state.reducedMotion ? 0 : 35);
+      }
+    }, state.reducedMotion ? 0 : 390);
+
+    window.setTimeout(() => {
+      elements.bossMonster.classList.remove("is-hit");
+      elements.battleArena.classList.remove("is-shaking");
+    }, state.reducedMotion ? 10 : 920);
+
+    window.setTimeout(() => {
+      attack.remove();
+      damageNumber.remove();
+    }, state.reducedMotion ? 20 : 1000);
+  }
+
+  function selectBattlePower(powerIndex, selectedButton) {
+    if (state.battleSelectedPower !== null) return;
+
+    const round = battleRounds[state.battleRoundIndex];
+    const power = round.powers[powerIndex];
+    state.battleSelectedPower = powerIndex;
+
+    Array.from(elements.powerCards.children).forEach((button) => {
+      button.disabled = true;
+      button.classList.toggle("is-selected", button === selectedButton);
+    });
+
+    let damage = power.damage;
+
+    if (state.battleRoundIndex === battleRounds.length - 1) {
+      damage = state.bossHealth;
+    } else {
+      damage = Math.min(damage, Math.max(1, state.bossHealth - 24));
+    }
+
+    state.bossHealth = Math.max(0, state.bossHealth - damage);
+    createBattleAttack(power, damage);
+
+    window.setTimeout(() => {
+      updateBattleHealth();
+      elements.battleFeedbackTitle.textContent = `${power.name} activated`;
+      elements.battleFeedbackText.textContent = power.feedback;
+      elements.battleFeedback.hidden = false;
+      elements.battleNextButton.disabled = false;
+
+      if (state.bossHealth <= 0) {
+        elements.bossSpeech.textContent = "“Wait… was that the actual final version?”";
+        elements.bossMonster.classList.add("is-defeated");
+      } else if (state.bossHealth <= 40) {
+        elements.bossSpeech.textContent = "“Perhaps one more revision was unnecessary…”";
+      } else {
+        elements.bossSpeech.textContent = "“This is becoming inconvenient.”";
+      }
+    }, state.reducedMotion ? 20 : 560);
+  }
+
+  function advanceBattle() {
+    if (state.battleSelectedPower === null) return;
+
+    if (state.battleRoundIndex < battleRounds.length - 1) {
+      state.battleRoundIndex += 1;
+      elements.battleActive.classList.remove("is-changing");
+      void elements.battleActive.offsetWidth;
+      elements.battleActive.classList.add("is-changing");
+      renderBattleRound();
+      return;
+    }
+
+    finishBattle(false);
+  }
+
+  function finishBattle(wasSkipped = false) {
+    state.battleCompleted = true;
+    state.battleSkipped = wasSkipped;
+    state.bossHealth = 0;
+    updateBattleHealth();
+
+    elements.courageInventory.classList.remove("inventory-item--locked");
+    elements.courageInventory.classList.add("is-unlocked");
+    elements.courageInventoryStatus.textContent = "Unlocked · Ready to collect";
+
+    setBattleView("victory");
+    updateNavigation();
+
+    showToast(
+      wasSkipped
+        ? "Battle skipped. Courage still belongs to Avin ✦"
+        : "Lord Deadline defeated. Degree unlocked: drg. ✦"
+    );
+  }
+
+  function skipBattle() {
+    state.battleRoundIndex = battleRounds.length - 1;
+    state.bossHealth = 0;
+    state.battleSelectedPower = 0;
+    finishBattle(true);
+  }
+
+  function collectCourageCrystal() {
+    if (!state.battleCompleted || state.courageCollected) return;
+
+    state.courageCollected = true;
+    elements.collectCourageButton.disabled = true;
+    elements.collectCourageButton.innerHTML =
+      'Crystal Safely Stored <span aria-hidden="true">✓</span>';
+    elements.courageInventoryStatus.textContent = "Safely stored in the Avinverse";
+    elements.courageCollectedMessage.hidden = false;
+
+    updateNavigation();
+    showToast("Crystal of Courage added to the Avinverse.");
+  }
+
+  function resetBattleToIntro() {
+    state.battleRoundIndex = 0;
+    state.bossHealth = 100;
+    state.battleSelectedPower = null;
+    state.battleCompleted = false;
+    state.courageCollected = false;
+    state.battleSkipped = false;
+
+    resetBossVisual();
+    updateBattleHealth();
+
+    elements.courageInventory.classList.add("inventory-item--locked");
+    elements.courageInventory.classList.remove("is-unlocked");
+    elements.courageInventoryStatus.textContent = "Locked by Lord Deadline";
+    elements.courageCollectedMessage.hidden = true;
+    elements.collectCourageButton.disabled = false;
+    elements.collectCourageButton.innerHTML =
+      'Collect Crystal of Courage <span aria-hidden="true">✦</span>';
+
+    setBattleView("intro");
     updateNavigation();
   }
 
@@ -750,10 +1149,15 @@
     elements.nextButton.addEventListener("click", () => {
       if (state.currentScene >= totalScenes - 1) {
         showToast(
-          state.crystalCollected
-            ? "Crystal safely stored. Next mission: Defeat Lord Deadline."
-            : "Complete the compatibility test to unlock the crystal."
+          state.courageCollected
+            ? "Crystal safely stored. Next destination: Memory Shards."
+            : "Defeat Lord Deadline to unlock the Crystal of Courage."
         );
+        return;
+      }
+
+      if (state.currentScene === 4 && !state.crystalCollected) {
+        showToast("Collect the Crystal of Determination before facing the boss.");
         return;
       }
 
@@ -776,6 +1180,14 @@
     elements.restartQuizButton.addEventListener("click", resetQuizToIntro);
     elements.reviewQuizButton.addEventListener("click", startQuiz);
     elements.collectCrystalButton.addEventListener("click", collectCrystal);
+    elements.continueToGameButton.addEventListener("click", () => goToScene(5));
+
+    elements.startBattleButton.addEventListener("click", startBattle);
+    elements.skipBattleButton.addEventListener("click", skipBattle);
+    elements.battleRestartButton.addEventListener("click", resetBattleToIntro);
+    elements.replayBattleButton.addEventListener("click", startBattle);
+    elements.battleNextButton.addEventListener("click", advanceBattle);
+    elements.collectCourageButton.addEventListener("click", collectCourageCrystal);
 
     document.addEventListener("keydown", (event) => {
       if (!state.hasEntered) {
@@ -808,7 +1220,7 @@
       (event) => {
         if (!state.hasEntered || event.touches.length !== 1) return;
 
-        if (event.target.closest(".quiz-card")) {
+        if (event.target.closest(".quiz-card, .battle-console")) {
           state.touchStartX = 0;
           state.touchStartY = 0;
           return;

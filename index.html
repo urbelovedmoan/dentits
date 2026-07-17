@@ -401,10 +401,243 @@
               </button>
             </div>
 
-            <p id="crystalCollectedMessage" class="crystal-collected-message" hidden>
-              Crystal safely stored in the Avinverse.
-              The next mission will be <strong>Defeat Lord Deadline</strong>.
+            <div id="crystalCollectedMessage" class="crystal-collected-message" hidden>
+              <p>
+                Crystal safely stored in the Avinverse.
+                The next mission is ready: <strong>Defeat Lord Deadline</strong>.
+              </p>
+              <button id="continueToGameButton" class="primary-button" type="button">
+                Face Lord Deadline
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SCENE 6: DEFEAT LORD DEADLINE -->
+    <section class="scene scene--battle" data-scene="5" aria-labelledby="battleSceneTitle" hidden>
+      <div class="scene-inner battle-layout">
+        <aside class="mission-panel">
+          <p class="eyebrow">Graduation mission · Final boss</p>
+          <h2 id="battleSceneTitle">Defeat<br />Lord Deadline</h2>
+          <p class="mission-panel__description">
+            Satu rintangan simbolis masih berdiri di depan gerbang kelulusan.
+            Untungnya, Avin telah menghadapi tantangan yang jauh lebih berat.
+          </p>
+
+          <div class="crystal-inventory glass-panel" aria-label="Koleksi kristal">
+            <p>CRYSTAL INVENTORY</p>
+            <div class="inventory-item" id="determinationInventory">
+              <span class="inventory-gem inventory-gem--determination" aria-hidden="true">◆</span>
+              <div>
+                <strong>Determination</strong>
+                <small id="determinationInventoryStatus">Recovered from compatibility test</small>
+              </div>
+            </div>
+            <div class="inventory-item inventory-item--locked" id="courageInventory">
+              <span class="inventory-gem inventory-gem--courage" aria-hidden="true">◆</span>
+              <div>
+                <strong>Courage</strong>
+                <small id="courageInventoryStatus">Locked by Lord Deadline</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="mission-note">
+            <span aria-hidden="true">i</span>
+            <p>
+              Tiga ronde, tanpa kemungkinan gagal. Pilih kekuatan yang paling
+              cocok dan nikmati respons dari Avinverse.
             </p>
+          </div>
+        </aside>
+
+        <article class="battle-console glass-panel">
+          <!-- Game intro -->
+          <div id="battleIntro" class="battle-view battle-view--intro">
+            <div class="boss-dossier">
+              <div class="boss-dossier__visual" aria-hidden="true">
+                <div class="mini-boss">
+                  <span class="mini-boss__horn mini-boss__horn--left"></span>
+                  <span class="mini-boss__horn mini-boss__horn--right"></span>
+                  <span class="mini-boss__eye mini-boss__eye--left"></span>
+                  <span class="mini-boss__eye mini-boss__eye--right"></span>
+                  <span class="mini-boss__mouth"></span>
+                </div>
+              </div>
+              <div>
+                <p class="eyebrow">Boss dossier · Threat level: dramatic</p>
+                <h3>Lord Deadline</h3>
+                <p>
+                  A mysterious creature powered by revisions, alarms, calendar
+                  notifications, and the phrase “sedikit revisi lagi”.
+                </p>
+              </div>
+            </div>
+
+            <div class="boss-stats">
+              <div>
+                <span>Special ability</span>
+                <strong>Appearing at the worst possible time</strong>
+              </div>
+              <div>
+                <span>Known weakness</span>
+                <strong>Avin’s determination</strong>
+              </div>
+              <div>
+                <span>Estimated battle time</span>
+                <strong>Three short rounds</strong>
+              </div>
+            </div>
+
+            <div class="battle-intro-actions">
+              <button id="skipBattleButton" class="secondary-button secondary-button--labeled" type="button">
+                <span aria-hidden="true">↠</span>
+                Skip Battle
+              </button>
+              <button id="startBattleButton" class="primary-button" type="button">
+                Begin Final Mission
+                <span aria-hidden="true">⚔</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Active battle -->
+          <div id="battleActive" class="battle-view battle-view--active" hidden>
+            <div class="battle-topbar">
+              <div>
+                <span id="battleRoundLabel">Round 1 of 3</span>
+                <strong id="battleRoundTitle">The First Revision</strong>
+              </div>
+              <button id="battleRestartButton" class="text-button" type="button">
+                Restart mission
+              </button>
+            </div>
+
+            <div id="battleArena" class="battle-arena">
+              <div class="battle-effects" id="battleEffects" aria-hidden="true"></div>
+
+              <div class="floating-paper floating-paper--one" aria-hidden="true">REVISION</div>
+              <div class="floating-paper floating-paper--two" aria-hidden="true">DEADLINE</div>
+              <div class="floating-paper floating-paper--three" aria-hidden="true">06:00</div>
+
+              <div id="bossMonster" class="boss-monster" aria-label="Lord Deadline">
+                <span class="boss-aura"></span>
+                <span class="boss-horn boss-horn--left"></span>
+                <span class="boss-horn boss-horn--right"></span>
+                <span class="boss-ear boss-ear--left"></span>
+                <span class="boss-ear boss-ear--right"></span>
+                <span class="boss-eye boss-eye--left"></span>
+                <span class="boss-eye boss-eye--right"></span>
+                <span class="boss-brow boss-brow--left"></span>
+                <span class="boss-brow boss-brow--right"></span>
+                <span class="boss-mouth">
+                  <i></i><i></i><i></i>
+                </span>
+              </div>
+
+              <div id="bossSpeech" class="boss-speech">
+                “You may have graduated, but have you checked the latest revision?”
+              </div>
+            </div>
+
+            <div class="boss-health">
+              <div class="boss-health__label">
+                <span>LORD DEADLINE · HP</span>
+                <strong id="bossHealthValue">100 / 100</strong>
+              </div>
+              <div class="boss-health__track">
+                <span id="bossHealthFill"></span>
+              </div>
+            </div>
+
+            <div class="power-section">
+              <div class="power-section__heading">
+                <div>
+                  <p class="eyebrow">Choose Avin’s power</p>
+                  <h3 id="powerPrompt">Select one card to attack.</h3>
+                </div>
+                <span id="roundHint">Every choice works.</span>
+              </div>
+
+              <div id="powerCards" class="power-cards" role="group" aria-label="Kartu kekuatan Avin"></div>
+
+              <div id="battleFeedback" class="battle-feedback" role="status" aria-live="polite" hidden>
+                <div class="battle-feedback__icon" id="battleFeedbackIcon" aria-hidden="true">✦</div>
+                <div>
+                  <strong id="battleFeedbackTitle">Attack successful</strong>
+                  <p id="battleFeedbackText"></p>
+                </div>
+              </div>
+
+              <button id="battleNextButton" class="primary-button battle-next-button" type="button" disabled>
+                Continue to Round 2
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Victory -->
+          <div id="battleVictory" class="battle-view battle-view--victory" hidden>
+            <div class="victory-burst" aria-hidden="true">
+              <span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span><span>✧</span>
+            </div>
+
+            <div class="victory-emblem" aria-hidden="true">
+              <span class="victory-emblem__ring"></span>
+              <span class="victory-emblem__crystal">◆</span>
+            </div>
+
+            <p class="eyebrow">Final boss defeated</p>
+            <h3>Degree Unlocked: drg.</h3>
+            <p>
+              Lord Deadline has been defeated by knowledge, patience, comfort
+              food, support, and a level of determination that cannot be
+              measured by ordinary instruments.
+            </p>
+
+            <div class="victory-report">
+              <div>
+                <span>MISSION STATUS</span>
+                <strong>COMPLETED</strong>
+              </div>
+              <div>
+                <span>NEW TITLE</span>
+                <strong>drg. Avin</strong>
+              </div>
+              <div>
+                <span>BOSS CONDITION</span>
+                <strong>Needs more revision</strong>
+              </div>
+            </div>
+
+            <blockquote>
+              Honestly, dental school was much harder than this game.
+            </blockquote>
+
+            <div class="victory-actions">
+              <button id="replayBattleButton" class="secondary-button secondary-button--labeled" type="button">
+                <span aria-hidden="true">↺</span>
+                Replay Battle
+              </button>
+              <button id="collectCourageButton" class="primary-button" type="button">
+                Collect Crystal of Courage
+                <span aria-hidden="true">✦</span>
+              </button>
+            </div>
+
+            <div id="courageCollectedMessage" class="courage-collected-message" hidden>
+              <span aria-hidden="true">✓</span>
+              <div>
+                <strong>Crystal of Courage safely stored.</strong>
+                <p>
+                  Next destination: <strong>Memory Shards</strong>, where four
+                  photographs will become floating portals of memories.
+                </p>
+              </div>
+            </div>
           </div>
         </article>
       </div>
