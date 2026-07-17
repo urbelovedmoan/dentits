@@ -16,6 +16,14 @@ Versi ini sudah berisi:
 - Crystal of Determination reward
 - Defeat Lord Deadline mini-game
 - Crystal of Courage reward
+- Memory Shards four-photo gallery
+- Crystal of Memories reward
+- Constellation of Every Smile
+- Crystal of Kindness reward
+- Secret Letter from Ansa
+- Animated crystal seal and envelope
+- Cinematic Graduation Finale
+- Confetti, stars, and sakura animation
 - Navigasi antarscene
 - Tombol musik
 - Mode animasi ringan
@@ -182,11 +190,136 @@ Fitur mini-game:
 - Hadiah **Crystal of Courage**
 - Mendukung mouse dan layar sentuh
 
-## Tahap berikutnya
+## Tahap terbaru
 
-Scene berikutnya adalah:
+Scene **Memory Shards** telah ditambahkan.
 
-**Memory Shards**
+Fitur galeri:
 
-Empat foto akan ditampilkan sebagai portal kristal. Setiap foto dapat dibuka,
-diperbesar, digeser di ponsel, dan diberi caption personal.
+- Empat portal foto
+- Placeholder otomatis ketika foto belum tersedia
+- Tampilan foto layar besar
+- Caption personal Indonesia dan Inggris
+- Navigasi tombol, keyboard, dan swipe
+- Progress arsip 0–100%
+- Status foto yang sudah dibuka
+- Tombol reset archive
+- Hadiah **Crystal of Memories**
+
+## Memasang empat foto
+
+Simpan foto dengan nama berikut:
+
+```text
+assets/photos/memory-1.jpg
+assets/photos/memory-2.jpg
+assets/photos/memory-3.jpg
+assets/photos/memory-4.jpg
+```
+
+Foto portrait paling ideal, tetapi foto landscape tetap dipotong otomatis.
+
+## Mengubah caption foto
+
+Buka `memory.js`, lalu edit bagian:
+
+```javascript
+const memories = [
+```
+
+## Tahap terbaru
+
+Scene **Constellation of Every Smile** telah ditambahkan.
+
+Fitur konstelasi:
+
+- Lima bintang interaktif
+- Lima pesan personal untuk Avin
+- Bintang dapat dibuka dalam urutan apa pun
+- Garis konstelasi muncul secara bertahap
+- Bentuk gigi bercahaya setelah seluruh bintang terbuka
+- Progress koneksi 0–100%
+- Tombol reset stars
+- Hadiah **Crystal of Kindness**
+- Tombol langsung dari Memory Shards menuju konstelasi
+
+## Mengubah pesan bintang
+
+Buka `constellation.js`, lalu edit bagian:
+
+```javascript
+const starMessages = [
+```
+
+## Tahap terbaru
+
+Scene **Secret Letter** telah ditambahkan.
+
+Fitur surat:
+
+- Empat kristal berkumpul menjadi segel
+- Animasi pecahnya crystal seal
+- Amplop digital dengan wax seal
+- Animasi amplop terbuka
+- Surat campuran bahasa Indonesia dan Inggris
+- Isi surat muncul bertahap per paragraf
+- Surat dapat di-scroll di laptop dan ponsel
+- Tombol replay letter
+- Tombol menyimpan pesan ke Avinverse
+- Tombol langsung dari konstelasi menuju surat
+
+## Mengubah isi surat
+
+Buka `index.html`, lalu cari:
+
+```html
+<div id="letterPaper"
+```
+
+Seluruh isi surat berada di dalam elemen tersebut.
+
+## Tahap terbaru
+
+Tahap terakhir, **Cinematic Graduation Finale**, telah ditambahkan.
+
+Fitur finale:
+
+- Empat kristal berkumpul sebelum perayaan
+- Empat kalimat pembuka sinematik
+- Hero reveal menggunakan `assets/photos/hero.jpg`
+- Gelar lengkap `drg. Avivien Aurandia Qanita`
+- Judul `The Guardian of Every Smile`
+- Confetti, kelopak sakura, dan partikel bintang
+- Pesan penutup dari Ansa
+- Tombol replay finale
+- Tombol copy website link
+- Tombol restart seluruh perjalanan
+- Tampilan responsif untuk laptop dan ponsel
+
+## Status proyek
+
+Seluruh alur utama AVINVERSE telah selesai:
+
+```text
+Loading
+→ Portal Opening
+→ Hero Reveal
+→ Character Profile
+→ Compatibility Test
+→ Defeat Lord Deadline
+→ Memory Shards
+→ Constellation of Every Smile
+→ Secret Letter
+→ Cinematic Graduation Finale
+```
+
+## Pemeriksaan akhir yang disarankan
+
+Sebelum dibagikan:
+
+1. Pastikan `hero.jpg` dan empat foto memory sudah tampil.
+2. Pastikan `background-music.mp3` dapat diputar.
+3. Uji seluruh alur menggunakan laptop.
+4. Uji lagi menggunakan ponsel dalam mode portrait.
+5. Coba tombol musik, swipe galeri, scroll surat, dan finale.
+6. Buka GitHub Pages melalui mode incognito untuk memastikan file terbaru dimuat.

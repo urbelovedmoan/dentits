@@ -324,6 +324,10 @@
     battleCompleted: false,
     courageCollected: false,
     battleSkipped: false,
+    memoriesCollected: false,
+    constellationCollected: false,
+    secretLetterOpened: false,
+    finaleCompleted: false,
   };
 
   function applyConfig() {
@@ -488,8 +492,24 @@
     elements.nextButton.disabled = state.currentScene >= totalScenes - 1;
 
     if (state.currentScene === totalScenes - 1) {
+      elements.nextButton.innerHTML = state.finaleCompleted
+        ? 'Journey Complete <span aria-hidden="true">✦</span>'
+        : 'Celebrate Avin <span aria-hidden="true">✦</span>';
+    } else if (state.currentScene === 8) {
+      elements.nextButton.innerHTML = state.secretLetterOpened
+        ? 'Final Celebration <span aria-hidden="true">→</span>'
+        : 'Open the Letter <span aria-hidden="true">✉</span>';
+    } else if (state.currentScene === 7) {
+      elements.nextButton.innerHTML = state.constellationCollected
+        ? 'Unlock Letter <span aria-hidden="true">→</span>'
+        : 'Connect the Stars <span aria-hidden="true">✧</span>';
+    } else if (state.currentScene === 6) {
+      elements.nextButton.innerHTML = state.memoriesCollected
+        ? 'Open Constellation <span aria-hidden="true">→</span>'
+        : 'Explore Memories <span aria-hidden="true">◇</span>';
+    } else if (state.currentScene === 5) {
       elements.nextButton.innerHTML = state.courageCollected
-        ? 'Courage Stored <span aria-hidden="true">✦</span>'
+        ? 'Open Memories <span aria-hidden="true">→</span>'
         : 'Defeat the Boss <span aria-hidden="true">⚔</span>';
     } else if (state.currentScene === 4) {
       elements.nextButton.innerHTML = state.crystalCollected
@@ -1149,15 +1169,35 @@
     elements.nextButton.addEventListener("click", () => {
       if (state.currentScene >= totalScenes - 1) {
         showToast(
-          state.courageCollected
-            ? "Crystal safely stored. Next destination: Memory Shards."
-            : "Defeat Lord Deadline to unlock the Crystal of Courage."
+          state.finaleCompleted
+            ? "The Avinverse journey is complete. Congratulations, drg. Avin."
+            : "Start the final celebration to complete the journey."
         );
         return;
       }
 
       if (state.currentScene === 4 && !state.crystalCollected) {
         showToast("Collect the Crystal of Determination before facing the boss.");
+        return;
+      }
+
+      if (state.currentScene === 5 && !state.courageCollected) {
+        showToast("Collect the Crystal of Courage before opening the memories.");
+        return;
+      }
+
+      if (state.currentScene === 6 && !state.memoriesCollected) {
+        showToast("Collect the Crystal of Memories before connecting the stars.");
+        return;
+      }
+
+      if (state.currentScene === 7 && !state.constellationCollected) {
+        showToast("Collect the Crystal of Kindness before unlocking the letter.");
+        return;
+      }
+
+      if (state.currentScene === 8 && !state.secretLetterOpened) {
+        showToast("Keep Ansa’s letter before beginning the final celebration.");
         return;
       }
 
@@ -1220,7 +1260,11 @@
       (event) => {
         if (!state.hasEntered || event.touches.length !== 1) return;
 
-        if (event.target.closest(".quiz-card, .battle-console")) {
+        if (
+          event.target.closest(
+            ".quiz-card, .battle-console, .memory-gallery-panel, .memory-modal"
+          )
+        ) {
           state.touchStartX = 0;
           state.touchStartY = 0;
           return;
@@ -1259,6 +1303,16 @@
       }
     });
   }
+
+  window.Avinverse = {
+    goToScene,
+    state,
+    updateNavigation,
+    showToast,
+    get reducedMotion() {
+      return state.reducedMotion;
+    },
+  };
 
   function init() {
     applyConfig();

@@ -16,6 +16,10 @@
   />
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="memory.css" />
+  <link rel="stylesheet" href="constellation.css" />
+  <link rel="stylesheet" href="letter.css" />
+  <link rel="stylesheet" href="finale.css" />
 </head>
 
 <body>
@@ -630,16 +634,788 @@
 
             <div id="courageCollectedMessage" class="courage-collected-message" hidden>
               <span aria-hidden="true">✓</span>
-              <div>
+              <div class="courage-collected-message__copy">
                 <strong>Crystal of Courage safely stored.</strong>
                 <p>
                   Next destination: <strong>Memory Shards</strong>, where four
-                  photographs will become floating portals of memories.
+                  photographs become floating portals of memories.
                 </p>
               </div>
+              <button id="continueToMemoriesButton" class="primary-button" type="button">
+                Open Memory Shards
+                <span aria-hidden="true">→</span>
+              </button>
             </div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- SCENE 7: MEMORY SHARDS -->
+    <section class="scene scene--memories" data-scene="6" aria-labelledby="memoriesSceneTitle" hidden>
+      <div class="scene-inner memories-layout">
+        <aside class="memories-intro">
+          <p class="eyebrow">Avinverse archive · Four fragments</p>
+          <h2 id="memoriesSceneTitle">Memory<br />Shards</h2>
+          <p class="memories-intro__description">
+            Tidak dibutuhkan ratusan foto untuk menyimpan sesuatu yang berarti.
+            Empat potongan kecil pun cukup untuk mengingatkan betapa berharganya
+            seseorang di dalam sebuah perjalanan.
+          </p>
+
+          <div class="memory-scan glass-panel">
+            <div class="memory-scan__header">
+              <div>
+                <small>ARCHIVE SCAN</small>
+                <strong id="memoryScanText">0 of 4 shards viewed</strong>
+              </div>
+              <span id="memoryScanPercent">0%</span>
+            </div>
+            <div class="memory-scan__track" aria-hidden="true">
+              <span id="memoryScanFill"></span>
+            </div>
+          </div>
+
+          <div class="memory-crystal-vault glass-panel">
+            <div id="memoryCrystalMini" class="memory-crystal-mini" aria-hidden="true">
+              <span>◆</span>
+            </div>
+            <div>
+              <small>REWARD</small>
+              <strong id="memoryCrystalStatus">Crystal of Memories · Dormant</strong>
+              <p>Open every shard to restore its light.</p>
+            </div>
+          </div>
+
+          <p class="memory-help">
+            Klik atau sentuh setiap kristal. Di dalam tampilan foto, gunakan
+            tombol panah, keyboard, atau swipe untuk berpindah.
+          </p>
+        </aside>
+
+        <div class="memory-gallery-panel glass-panel">
+          <div class="memory-gallery-heading">
+            <div>
+              <p class="eyebrow">Select a floating fragment</p>
+              <h3>Four moments, one special person.</h3>
+            </div>
+            <button id="resetMemoriesButton" class="text-button" type="button">
+              Reset archive
+            </button>
+          </div>
+
+          <div id="memoryShardsGrid" class="memory-shards-grid">
+            <button class="memory-shard memory-shard--one" type="button" data-memory-index="0">
+              <span class="memory-shard__glow" aria-hidden="true"></span>
+              <span class="memory-shard__frame">
+                <img src="assets/photos/memory-1.jpg" alt="Memory shard 1 featuring Avin" />
+                <span class="memory-shard__fallback" aria-hidden="true">
+                  <strong>AQ</strong><small>memory-1.jpg</small>
+                </span>
+              </span>
+              <span class="memory-shard__meta">
+                <small>FRAGMENT 01</small><strong>The Beginning</strong>
+              </span>
+              <span class="memory-shard__status" aria-hidden="true">Unopened</span>
+            </button>
+
+            <button class="memory-shard memory-shard--two" type="button" data-memory-index="1">
+              <span class="memory-shard__glow" aria-hidden="true"></span>
+              <span class="memory-shard__frame">
+                <img src="assets/photos/memory-2.jpg" alt="Memory shard 2 featuring Avin" />
+                <span class="memory-shard__fallback" aria-hidden="true">
+                  <strong>AQ</strong><small>memory-2.jpg</small>
+                </span>
+              </span>
+              <span class="memory-shard__meta">
+                <small>FRAGMENT 02</small><strong>The Strength</strong>
+              </span>
+              <span class="memory-shard__status" aria-hidden="true">Unopened</span>
+            </button>
+
+            <button class="memory-shard memory-shard--three" type="button" data-memory-index="2">
+              <span class="memory-shard__glow" aria-hidden="true"></span>
+              <span class="memory-shard__frame">
+                <img src="assets/photos/memory-3.jpg" alt="Memory shard 3 featuring Avin" />
+                <span class="memory-shard__fallback" aria-hidden="true">
+                  <strong>AQ</strong><small>memory-3.jpg</small>
+                </span>
+              </span>
+              <span class="memory-shard__meta">
+                <small>FRAGMENT 03</small><strong>The Smile</strong>
+              </span>
+              <span class="memory-shard__status" aria-hidden="true">Unopened</span>
+            </button>
+
+            <button class="memory-shard memory-shard--four" type="button" data-memory-index="3">
+              <span class="memory-shard__glow" aria-hidden="true"></span>
+              <span class="memory-shard__frame">
+                <img src="assets/photos/memory-4.jpg" alt="Memory shard 4 featuring Avin" />
+                <span class="memory-shard__fallback" aria-hidden="true">
+                  <strong>AQ</strong><small>memory-4.jpg</small>
+                </span>
+              </span>
+              <span class="memory-shard__meta">
+                <small>FRAGMENT 04</small><strong>The Next Chapter</strong>
+              </span>
+              <span class="memory-shard__status" aria-hidden="true">Unopened</span>
+            </button>
+          </div>
+
+          <div id="memoryRewardPanel" class="memory-reward-panel" hidden>
+            <div class="memory-reward-panel__emblem" aria-hidden="true">◆</div>
+            <div>
+              <p class="eyebrow">All fragments restored</p>
+              <h3>Every memory has returned to the Avinverse.</h3>
+              <p>
+                The moments may be few, but the person inside them means more
+                than any archive could ever measure.
+              </p>
+            </div>
+            <button id="collectMemoriesButton" class="primary-button" type="button">
+              Collect Crystal of Memories
+              <span aria-hidden="true">✦</span>
+            </button>
+          </div>
+
+          <div id="memoriesCollectedMessage" class="memories-collected-message" hidden>
+            <span aria-hidden="true">✓</span>
+            <div class="memories-collected-message__copy">
+              <strong>Crystal of Memories safely stored.</strong>
+              <p>
+                The next universe will connect the stars into Avin’s
+                <strong>Constellation of Every Smile</strong>.
+              </p>
+            </div>
+            <button id="continueToConstellationButton" class="primary-button" type="button">
+              Connect the Stars
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 8: CONSTELLATION OF EVERY SMILE -->
+    <section class="scene scene--constellation" data-scene="7" aria-labelledby="constellationSceneTitle" hidden>
+      <div class="scene-inner constellation-layout">
+        <aside class="constellation-intro">
+          <p class="eyebrow">Celestial archive · Five guiding stars</p>
+          <h2 id="constellationSceneTitle">Constellation<br />of Every Smile</h2>
+          <p class="constellation-intro__description">
+            Setiap perjuangan meninggalkan cahaya. Sentuh lima bintang ini untuk
+            membuka pesan yang tersimpan, lalu biarkan semuanya terhubung menjadi
+            simbol perjalanan Avin.
+          </p>
+
+          <div class="constellation-progress glass-panel">
+            <div class="constellation-progress__header">
+              <div>
+                <small>STAR CONNECTION</small>
+                <strong id="constellationProgressText">0 of 5 stars connected</strong>
+              </div>
+              <span id="constellationProgressPercent">0%</span>
+            </div>
+            <div class="constellation-progress__track" aria-hidden="true">
+              <span id="constellationProgressFill"></span>
+            </div>
+          </div>
+
+          <div class="kindness-vault glass-panel">
+            <div id="kindnessCrystalMini" class="kindness-crystal-mini" aria-hidden="true">
+              <span>◆</span>
+            </div>
+            <div>
+              <small>REWARD</small>
+              <strong id="kindnessCrystalStatus">Crystal of Kindness · Sleeping</strong>
+              <p>Its light grows whenever a star is opened.</p>
+            </div>
+          </div>
+
+          <p class="constellation-help">
+            Bintang dapat dibuka dalam urutan apa pun. Tekan lagi bintang yang
+            sama untuk membaca ulang pesannya.
+          </p>
+        </aside>
+
+        <article class="constellation-panel glass-panel">
+          <div class="constellation-panel__heading">
+            <div>
+              <p class="eyebrow">Select a celestial message</p>
+              <h3>Every difficult moment became part of her light.</h3>
+            </div>
+            <button id="resetConstellationButton" class="text-button" type="button">
+              Reset stars
+            </button>
+          </div>
+
+          <div id="constellationSky" class="constellation-sky">
+            <div class="celestial-haze celestial-haze--one" aria-hidden="true"></div>
+            <div class="celestial-haze celestial-haze--two" aria-hidden="true"></div>
+
+            <span class="decorative-star decorative-star--one" aria-hidden="true">✦</span>
+            <span class="decorative-star decorative-star--two" aria-hidden="true">·</span>
+            <span class="decorative-star decorative-star--three" aria-hidden="true">✧</span>
+            <span class="decorative-star decorative-star--four" aria-hidden="true">·</span>
+            <span class="decorative-star decorative-star--five" aria-hidden="true">✦</span>
+            <span class="decorative-star decorative-star--six" aria-hidden="true">·</span>
+
+            <svg
+              class="constellation-map"
+              viewBox="0 0 700 600"
+              role="img"
+              aria-label="Konstelasi berbentuk gigi yang terbentuk dari lima bintang"
+            >
+              <defs>
+                <filter id="constellationGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <linearGradient id="constellationGradient" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#bca7ff" />
+                  <stop offset="50%" stop-color="#f6a6cd" />
+                  <stop offset="100%" stop-color="#e7c680" />
+                </linearGradient>
+              </defs>
+
+              <path
+                class="constellation-ghost"
+                d="M205 112 C175 150 160 200 169 250
+                   C180 320 220 380 235 465
+                   C245 520 260 548 280 530
+                   C303 510 295 422 350 422
+                   C405 422 397 510 420 530
+                   C440 548 455 520 465 465
+                   C480 380 520 320 531 250
+                   C540 200 525 150 495 112
+                   C440 80 400 105 350 106
+                   C300 105 260 80 205 112 Z"
+              />
+
+              <path
+                class="constellation-segment"
+                data-segment-index="0"
+                pathLength="1"
+                d="M205 112 C175 150 160 200 169 250"
+              />
+              <path
+                class="constellation-segment"
+                data-segment-index="1"
+                pathLength="1"
+                d="M205 112 C260 80 300 105 350 106"
+              />
+              <path
+                class="constellation-segment"
+                data-segment-index="2"
+                pathLength="1"
+                d="M350 106 C400 105 440 80 495 112 C525 150 540 200 531 250"
+              />
+              <path
+                class="constellation-segment"
+                data-segment-index="3"
+                pathLength="1"
+                d="M531 250 C520 320 480 380 465 465
+                   C455 520 440 548 420 530
+                   C397 510 405 422 350 422"
+              />
+              <path
+                class="constellation-segment"
+                data-segment-index="4"
+                pathLength="1"
+                d="M350 422 C295 422 303 510 280 530
+                   C260 548 245 520 235 465
+                   C220 380 180 320 169 250"
+              />
+
+              <path
+                id="completedToothOutline"
+                class="completed-tooth-outline"
+                pathLength="1"
+                d="M205 112 C175 150 160 200 169 250
+                   C180 320 220 380 235 465
+                   C245 520 260 548 280 530
+                   C303 510 295 422 350 422
+                   C405 422 397 510 420 530
+                   C440 548 455 520 465 465
+                   C480 380 520 320 531 250
+                   C540 200 525 150 495 112
+                   C440 80 400 105 350 106
+                   C300 105 260 80 205 112 Z"
+              />
+            </svg>
+
+            <button
+              class="constellation-star constellation-star--one"
+              type="button"
+              data-star-index="0"
+              aria-label="Buka bintang pertama"
+            >
+              <span class="constellation-star__pulse" aria-hidden="true"></span>
+              <span class="constellation-star__symbol" aria-hidden="true">✦</span>
+              <small>01</small>
+            </button>
+
+            <button
+              class="constellation-star constellation-star--two"
+              type="button"
+              data-star-index="1"
+              aria-label="Buka bintang kedua"
+            >
+              <span class="constellation-star__pulse" aria-hidden="true"></span>
+              <span class="constellation-star__symbol" aria-hidden="true">✦</span>
+              <small>02</small>
+            </button>
+
+            <button
+              class="constellation-star constellation-star--three"
+              type="button"
+              data-star-index="2"
+              aria-label="Buka bintang ketiga"
+            >
+              <span class="constellation-star__pulse" aria-hidden="true"></span>
+              <span class="constellation-star__symbol" aria-hidden="true">✦</span>
+              <small>03</small>
+            </button>
+
+            <button
+              class="constellation-star constellation-star--four"
+              type="button"
+              data-star-index="3"
+              aria-label="Buka bintang keempat"
+            >
+              <span class="constellation-star__pulse" aria-hidden="true"></span>
+              <span class="constellation-star__symbol" aria-hidden="true">✦</span>
+              <small>04</small>
+            </button>
+
+            <button
+              class="constellation-star constellation-star--five"
+              type="button"
+              data-star-index="4"
+              aria-label="Buka bintang kelima"
+            >
+              <span class="constellation-star__pulse" aria-hidden="true"></span>
+              <span class="constellation-star__symbol" aria-hidden="true">✦</span>
+              <small>05</small>
+            </button>
+
+            <div id="constellationMessage" class="constellation-message" aria-live="polite">
+              <div class="constellation-message__number">
+                <span id="constellationMessageNumber">STAR 00</span>
+                <small id="constellationMessageStatus">Awaiting connection</small>
+              </div>
+              <p id="constellationMessageKicker" class="eyebrow">Choose a star</p>
+              <h4 id="constellationMessageTitle">A message is waiting in the sky.</h4>
+              <p id="constellationMessageText">
+                Buka salah satu bintang untuk mengungkap cahaya yang tersimpan di dalamnya.
+              </p>
+            </div>
+          </div>
+
+          <div id="constellationRewardPanel" class="constellation-reward-panel" hidden>
+            <div class="constellation-reward-panel__emblem" aria-hidden="true">◆</div>
+            <div>
+              <p class="eyebrow">Constellation completed</p>
+              <h3>Every difficult moment became part of your constellation.</h3>
+              <p>
+                The stars now form a symbol of knowledge, care, purpose, and all
+                the smiles Avin will help protect.
+              </p>
+            </div>
+            <button id="collectKindnessButton" class="primary-button" type="button">
+              Collect Crystal of Kindness
+              <span aria-hidden="true">✦</span>
+            </button>
+          </div>
+
+          <div id="kindnessCollectedMessage" class="kindness-collected-message" hidden>
+            <span aria-hidden="true">✓</span>
+            <div class="kindness-collected-message__copy">
+              <strong>Crystal of Kindness safely stored.</strong>
+              <p>
+                Four crystals have now been recovered. The next universe will
+                unlock a secret letter from <strong>Ansa</strong>.
+              </p>
+            </div>
+            <button id="continueToLetterButton" class="primary-button" type="button">
+              Unlock Secret Letter
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SCENE 9: SECRET LETTER -->
+    <section class="scene scene--letter" data-scene="8" aria-labelledby="letterSceneTitle" hidden>
+      <div class="scene-inner letter-layout">
+        <aside class="letter-intro">
+          <p class="eyebrow">Encrypted message · Sender verified</p>
+          <h2 id="letterSceneTitle">A Letter<br />Across Universes</h2>
+          <p class="letter-intro__description">
+            Empat kristal telah ditemukan. Ketika seluruh cahaya mereka
+            disatukan, sebuah pesan pribadi dari Ansa dapat dibuka.
+          </p>
+
+          <div class="letter-crystal-list glass-panel" aria-label="Empat kristal yang telah dikumpulkan">
+            <div class="letter-crystal-item">
+              <span class="letter-crystal-icon letter-crystal-icon--determination" aria-hidden="true">◆</span>
+              <div><small>01</small><strong>Determination</strong></div>
+            </div>
+            <div class="letter-crystal-item">
+              <span class="letter-crystal-icon letter-crystal-icon--courage" aria-hidden="true">◆</span>
+              <div><small>02</small><strong>Courage</strong></div>
+            </div>
+            <div class="letter-crystal-item">
+              <span class="letter-crystal-icon letter-crystal-icon--memories" aria-hidden="true">◆</span>
+              <div><small>03</small><strong>Memories</strong></div>
+            </div>
+            <div class="letter-crystal-item">
+              <span class="letter-crystal-icon letter-crystal-icon--kindness" aria-hidden="true">◆</span>
+              <div><small>04</small><strong>Kindness</strong></div>
+            </div>
+          </div>
+
+          <div class="letter-access glass-panel">
+            <span id="letterAccessDot" class="letter-access__dot" aria-hidden="true"></span>
+            <div>
+              <small>MESSAGE STATUS</small>
+              <strong id="letterAccessStatus">Ready to unlock</strong>
+            </div>
+          </div>
+
+          <p class="letter-help">
+            Musik dapat tetap diputar. Gunakan tombol “Buka surat” untuk
+            memulai animasi, lalu scroll isi surat jika diperlukan.
+          </p>
+        </aside>
+
+        <article class="letter-stage glass-panel">
+          <div id="letterSealView" class="letter-view letter-view--seal">
+            <div id="crystalSeal" class="crystal-seal" aria-hidden="true">
+              <span class="crystal-seal__orbit crystal-seal__orbit--one"></span>
+              <span class="crystal-seal__orbit crystal-seal__orbit--two"></span>
+              <span class="crystal-seal__core">✦</span>
+              <span class="crystal-seal__gem crystal-seal__gem--one">◆</span>
+              <span class="crystal-seal__gem crystal-seal__gem--two">◆</span>
+              <span class="crystal-seal__gem crystal-seal__gem--three">◆</span>
+              <span class="crystal-seal__gem crystal-seal__gem--four">◆</span>
+            </div>
+
+            <p class="eyebrow">Four crystals synchronized</p>
+            <h3>A private message from Ansa is waiting.</h3>
+            <p>
+              Tidak ada teka-teki lagi. Hanya sebuah surat yang dibuat untuk
+              satu orang istimewa di hari kelulusannya.
+            </p>
+
+            <button id="unlockLetterButton" class="primary-button" type="button">
+              Break the Crystal Seal
+              <span aria-hidden="true">✦</span>
+            </button>
+          </div>
+
+          <div id="letterEnvelopeView" class="letter-view letter-view--envelope" hidden>
+            <div id="digitalEnvelope" class="digital-envelope" aria-hidden="true">
+              <div class="digital-envelope__shadow"></div>
+              <div class="digital-envelope__back"></div>
+              <div class="digital-envelope__letter-preview">
+                <span>For Avin</span>
+              </div>
+              <div class="digital-envelope__front"></div>
+              <div class="digital-envelope__flap"></div>
+              <div class="digital-envelope__wax">
+                <span>∞</span>
+              </div>
+              <div class="digital-envelope__sparkles">
+                <i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+
+            <p class="eyebrow">Seal broken · Envelope ready</p>
+            <h3>For drg. Avin, with love.</h3>
+            <p>
+              Tekan amplop atau tombol di bawah untuk membaca pesan dari Ansa.
+            </p>
+
+            <button id="openEnvelopeButton" class="primary-button" type="button">
+              Open the Letter
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div id="letterReadingView" class="letter-view letter-view--reading" hidden>
+            <div class="letter-paper-wrap">
+              <div id="letterPaper" class="letter-paper" tabindex="0" aria-label="Surat dari Ansa untuk Avin">
+                <div class="letter-paper__header">
+                  <span>18 July 2026</span>
+                  <span>AVINVERSE · PRIVATE MESSAGE</span>
+                </div>
+
+                <div class="letter-paper__ornament" aria-hidden="true">✦</div>
+
+                <p class="letter-salutation letter-reveal">
+                  Untuk dokter gigi favoritku, Avin,
+                </p>
+
+                <p class="letter-reveal">
+                  Congratulations, <strong>drg. Avivien Aurandia Qanita.</strong>
+                </p>
+
+                <p class="letter-reveal">
+                  Akhirnya hari yang sudah kamu perjuangkan begitu lama benar-benar
+                  datang. Hari ini bukan hanya tentang toga, foto wisuda, atau gelar
+                  baru yang tertulis di depan namamu. Hari ini adalah bukti dari
+                  semua usaha, keberanian, kesabaran, lelah, dan doa yang selama ini
+                  mungkin tidak selalu dilihat oleh orang lain.
+                </p>
+
+                <p class="letter-reveal">
+                  Aku tahu perjalananmu tidak selalu mudah. Mungkin ada hari-hari
+                  ketika semuanya terasa seperti satu season <em>Attack on Titan</em>:
+                  penuh tekanan, kejutan, perjuangan, dan rasanya masalah baru selalu
+                  muncul sebelum masalah sebelumnya selesai. Tetapi seperti heroine
+                  yang sesungguhnya, kamu terus berjalan sampai akhir.
+                </p>
+
+                <p class="letter-reveal letter-emphasis">
+                  And now, look at you. You did it, Avin. You are officially a dentist.
+                </p>
+
+                <p class="letter-reveal">
+                  Salah satu hal yang paling aku kagumi darimu adalah alasanmu
+                  mencintai profesi ini. Kamu tidak hanya ingin merawat gigi
+                  seseorang. Kamu ingin membantu lebih banyak orang memahami
+                  pentingnya menjaga kesehatan gigi. Menurutku, itu adalah kekuatan
+                  yang sangat indah: menggunakan ilmu yang kamu miliki agar orang
+                  lain dapat hidup dengan lebih sehat dan lebih percaya diri.
+                </p>
+
+                <p class="letter-reveal">
+                  Aku yakin kelak akan ada banyak orang yang merasa beruntung pernah
+                  menjadi pasienmu. Bukan hanya karena kamu pintar, tetapi karena
+                  kamu peduli. Kamu memiliki cara sendiri untuk membuat orang merasa
+                  didengarkan, diperhatikan, dan tidak sendirian.
+                </p>
+
+                <p class="letter-reveal">
+                  Hari ini kamu mungkin mendapatkan gelar baru, tetapi bagiku kamu
+                  tetap Avin yang sama—yang menyukai sate Padang, bisa dipulihkan
+                  energinya dengan Indomie goreng, menyukai dunia Marvel, menonton
+                  anime, dan entah bagaimana selalu berhasil membuatku semakin
+                  bangga kepadamu.
+                </p>
+
+                <p class="letter-reveal letter-emphasis">
+                  In every universe, I think I would still be proud of you.
+                </p>
+
+                <p class="letter-reveal">
+                  Dan dari semua kemungkinan universe yang ada, aku sangat bersyukur
+                  bisa berada di universe tempat aku dapat menyaksikan hari bahagiamu
+                  ini.
+                </p>
+
+                <p class="letter-reveal">
+                  Semoga perjalanan setelah wisuda membawamu kepada banyak pengalaman
+                  baik, orang-orang baik, dan kesempatan untuk mewujudkan semua hal
+                  yang kamu impikan. Semoga ketika perjalanan itu terasa berat, kamu
+                  selalu ingat bahwa kamu pernah berhasil sampai sejauh ini.
+                </p>
+
+                <p class="letter-reveal letter-emphasis">
+                  You are capable. You are loved. You are more than enough.
+                </p>
+
+                <p class="letter-reveal">
+                  Selamat atas kelulusanmu, drg. Avin. The world has gained a
+                  wonderful dentist, and I am lucky to have someone as wonderful as
+                  you in my life.
+                </p>
+
+                <p class="letter-reveal">
+                  I am so proud of you—today, tomorrow, and in every universe.
+                </p>
+
+                <div class="letter-signature letter-reveal">
+                  <span>With love,</span>
+                  <strong>Ansa</strong>
+                </div>
+
+                <div class="letter-paper__footer letter-reveal">
+                  <span>Made especially for drg. Avin</span>
+                  <span>✦</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="letter-reading-actions">
+              <button id="replayLetterButton" class="secondary-button secondary-button--labeled" type="button">
+                <span aria-hidden="true">↺</span>
+                Replay Letter
+              </button>
+              <button id="completeLetterButton" class="primary-button" type="button">
+                Keep This Message
+                <span aria-hidden="true">♡</span>
+              </button>
+            </div>
+
+            <div id="letterCompletedMessage" class="letter-completed-message" hidden>
+              <span aria-hidden="true">✓</span>
+              <div class="letter-completed-message__copy">
+                <strong>The letter has been safely kept in the Avinverse.</strong>
+                <p>
+                  The final cinematic celebration is now ready to begin.
+                </p>
+              </div>
+              <button id="continueToFinaleButton" class="primary-button" type="button">
+                Begin Final Celebration
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SCENE 10: CINEMATIC GRADUATION FINALE -->
+    <section class="scene scene--finale" data-scene="9" aria-labelledby="finaleSceneTitle" hidden>
+      <canvas id="finaleCanvas" class="finale-canvas" aria-hidden="true"></canvas>
+
+      <div class="scene-inner finale-layout">
+        <div id="finaleIntroView" class="finale-view finale-view--intro">
+          <div class="finale-crystal-system" aria-hidden="true">
+            <span class="finale-crystal-orbit finale-crystal-orbit--one"></span>
+            <span class="finale-crystal-orbit finale-crystal-orbit--two"></span>
+            <span class="finale-crystal finale-crystal--one">◆</span>
+            <span class="finale-crystal finale-crystal--two">◆</span>
+            <span class="finale-crystal finale-crystal--three">◆</span>
+            <span class="finale-crystal finale-crystal--four">◆</span>
+            <span class="finale-crystal-core">✦</span>
+          </div>
+
+          <p class="eyebrow">Final universe · Celebration protocol</p>
+          <h2 id="finaleSceneTitle">The Final Chapter Is Ready.</h2>
+          <p>
+            Seluruh kristal, kenangan, pesan, dan cahaya telah terkumpul.
+            Sekarang saatnya merayakan seseorang yang berhasil sampai sejauh ini.
+          </p>
+
+          <button id="startFinaleButton" class="primary-button finale-start-button" type="button">
+            Start the Celebration
+            <span aria-hidden="true">✦</span>
+          </button>
+
+          <small class="finale-intro-note">
+            Musik akan tetap mengikuti pengaturan yang sedang aktif.
+          </small>
+        </div>
+
+        <div id="finaleCinematicView" class="finale-view finale-view--cinematic" hidden>
+          <div class="finale-backdrop" aria-hidden="true">
+            <span class="finale-ring finale-ring--one"></span>
+            <span class="finale-ring finale-ring--two"></span>
+            <span class="finale-ring finale-ring--three"></span>
+            <span class="finale-light-beam finale-light-beam--one"></span>
+            <span class="finale-light-beam finale-light-beam--two"></span>
+          </div>
+
+          <div id="finaleStoryText" class="finale-story-text" aria-live="polite">
+            <p class="finale-story-line" data-finale-line="0">
+              The assignments have been completed.
+            </p>
+            <p class="finale-story-line" data-finale-line="1">
+              The deadlines have been defeated.
+            </p>
+            <p class="finale-story-line" data-finale-line="2">
+              The degree has been earned.
+            </p>
+            <p class="finale-story-line finale-story-line--accent" data-finale-line="3">
+              But her story is only beginning.
+            </p>
+          </div>
+
+          <div id="finaleHeroReveal" class="finale-hero-reveal">
+            <div class="finale-portrait-system">
+              <span class="finale-portrait-orbit finale-portrait-orbit--one" aria-hidden="true"></span>
+              <span class="finale-portrait-orbit finale-portrait-orbit--two" aria-hidden="true"></span>
+              <div class="finale-portrait">
+                <img
+                  id="finaleHeroImage"
+                  src="assets/photos/hero.jpg"
+                  alt="Foto drg. Avivien Aurandia Qanita"
+                />
+                <div id="finaleHeroFallback" class="finale-portrait-fallback" hidden aria-hidden="true">
+                  <strong>AQ</strong>
+                  <small>Place hero.jpg inside assets/photos/</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="finale-title-block">
+              <p class="eyebrow">Congratulations</p>
+              <h2>
+                <span>drg.</span>
+                Avivien Aurandia Qanita
+              </h2>
+              <p class="finale-guardian-title">The Guardian of Every Smile</p>
+              <blockquote>
+                In every universe, she was destined to make people smile.
+              </blockquote>
+            </div>
+          </div>
+
+          <div id="finaleCelebrationMessage" class="finale-celebration-message">
+            <span class="finale-celebration-symbol" aria-hidden="true">✦</span>
+            <p>18 July 2026</p>
+            <h3>Ansa is incredibly proud of you.</h3>
+            <p>
+              Today, tomorrow, and in every universe.
+            </p>
+          </div>
+        </div>
+
+        <div id="finaleCompleteView" class="finale-view finale-view--complete" hidden>
+          <div class="finale-complete-emblem" aria-hidden="true">
+            <span class="finale-complete-emblem__ring"></span>
+            <span class="finale-complete-emblem__heart">♡</span>
+          </div>
+
+          <p class="eyebrow">Avinverse journey completed</p>
+          <h2>Congratulations, drg. Avin.</h2>
+          <p>
+            The world has gained a wonderful dentist, and a new chapter has
+            officially begun.
+          </p>
+
+          <div class="finale-complete-card glass-panel">
+            <span>CHAPTER 01</span>
+            <strong>Celebrating Avin</strong>
+            <small>To be continued... together.</small>
+          </div>
+
+          <div class="finale-actions">
+            <button id="replayFinaleButton" class="secondary-button secondary-button--labeled" type="button">
+              <span aria-hidden="true">↺</span>
+              Replay Finale
+            </button>
+
+            <button id="copyFinaleLinkButton" class="secondary-button secondary-button--labeled" type="button">
+              <span aria-hidden="true">⧉</span>
+              Copy Link
+            </button>
+
+            <button id="restartJourneyButton" class="primary-button" type="button">
+              Restart the Journey
+              <span aria-hidden="true">✦</span>
+            </button>
+          </div>
+
+          <p id="finaleCopyStatus" class="finale-copy-status" aria-live="polite"></p>
+        </div>
       </div>
     </section>
   </main>
@@ -658,8 +1434,53 @@
     </button>
   </nav>
 
+
+  <div id="memoryModal" class="memory-modal" role="dialog" aria-modal="true" aria-labelledby="memoryModalTitle" hidden>
+    <div class="memory-modal__backdrop" data-memory-close></div>
+
+    <div class="memory-modal__dialog">
+      <button id="closeMemoryModalButton" class="memory-modal__close" type="button" aria-label="Tutup foto">
+        <span aria-hidden="true">×</span>
+      </button>
+
+      <div id="memoryModalStage" class="memory-modal__stage">
+        <div class="memory-modal__image-wrap">
+          <img id="memoryModalImage" src="" alt="" />
+          <div id="memoryModalFallback" class="memory-modal__fallback" hidden>
+            <strong>AQ</strong>
+            <p id="memoryModalFallbackFile">Place the photo in assets/photos/</p>
+          </div>
+          <span class="memory-modal__shine" aria-hidden="true"></span>
+        </div>
+
+        <button id="previousMemoryButton" class="memory-modal__nav memory-modal__nav--previous" type="button" aria-label="Foto sebelumnya">
+          <span aria-hidden="true">←</span>
+        </button>
+        <button id="nextMemoryButton" class="memory-modal__nav memory-modal__nav--next" type="button" aria-label="Foto berikutnya">
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <div class="memory-modal__copy">
+        <div class="memory-modal__counter">
+          <span id="memoryModalNumber">Fragment 01</span>
+          <span id="memoryModalViewed">New memory discovered</span>
+        </div>
+        <p id="memoryModalKicker" class="eyebrow">The Beginning</p>
+        <h2 id="memoryModalTitle">Memory title</h2>
+        <p id="memoryModalCaption">Memory caption</p>
+        <div id="memoryModalDots" class="memory-modal__dots" aria-label="Navigasi foto"></div>
+      </div>
+    </div>
+  </div>
+
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script src="script.js"></script>
+  <script src="memory.js"></script>
+  <script src="constellation.js"></script>
+  <script src="letter.js"></script>
+  <script src="finale.js"></script>
 </body>
 </html>
