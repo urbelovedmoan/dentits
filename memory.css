@@ -233,34 +233,60 @@
   pointer-events: none;
 }
 
-.memory-shard__frame img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-}
-
-.memory-shard__fallback {
+ .journey-shard__art {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: grid;
   place-content: center;
-  gap: 6px;
+  gap: 8px;
   text-align: center;
+  padding: 16px;
 }
 
-.memory-shard__fallback strong {
-  font-family: var(--font-display);
-  font-size: 2.8rem;
-  font-weight: 600;
+.journey-shard__icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin-inline: auto;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 18px;
+  background: rgba(255,255,255,.06);
+  font-size: 1.7rem;
+  box-shadow: 0 0 26px rgba(255,255,255,.08);
 }
 
-.memory-shard__fallback small {
-  color: var(--muted);
+.journey-shard__art small {
+  color: rgba(255,255,255,.7);
   font-size: .5rem;
-  letter-spacing: .08em;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.journey-shard__art--beginning {
+  background:
+    radial-gradient(circle at 50% 24%, rgba(231,198,128,.14), transparent 32%),
+    linear-gradient(145deg, rgba(231,198,128,.11), rgba(188,167,255,.08));
+}
+
+.journey-shard__art--struggle {
+  background:
+    radial-gradient(circle at 50% 22%, rgba(246,166,205,.16), transparent 32%),
+    linear-gradient(145deg, rgba(246,166,205,.12), rgba(109,71,146,.12));
+}
+
+.journey-shard__art--purpose {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(169,240,207,.16), transparent 32%),
+    linear-gradient(145deg, rgba(169,240,207,.11), rgba(159,231,239,.08));
+}
+
+.journey-shard__art--next {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(188,167,255,.18), transparent 34%),
+    linear-gradient(145deg, rgba(188,167,255,.12), rgba(246,166,205,.1));
 }
 
 .memory-shard__meta small,
@@ -467,7 +493,7 @@ body.memory-modal-open { overflow: hidden; }
 .memory-modal__stage::before { transform: rotate(20deg); }
 .memory-modal__stage::after { transform: rotate(-26deg); }
 
-.memory-modal__image-wrap {
+.memory-modal__journey-wrap {
   position: relative;
   z-index: 2;
   width: min(430px,74vw);
@@ -476,39 +502,40 @@ body.memory-modal-open { overflow: hidden; }
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.2);
   border-radius: 47% 47% 23% 23% / 29% 29% 13% 13%;
-  background: radial-gradient(circle at 50% 20%, rgba(255,255,255,.18), transparent 27%), linear-gradient(145deg,#704893,#241341 72%);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,.18), transparent 27%),
+    linear-gradient(145deg,#704893,#241341 72%);
   box-shadow: 0 34px 80px rgba(0,0,0,.45), 0 0 0 10px rgba(255,255,255,.025), 0 0 75px rgba(196,131,227,.17);
-}
-
-.memory-modal__image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-}
-
-.memory-modal__fallback {
-  position: absolute;
-  inset: 0;
   display: grid;
-  place-content: center;
-  padding: 24px;
+  place-items: center;
   text-align: center;
+  padding: 34px;
 }
 
-.memory-modal__fallback strong {
-  font-family: var(--font-display);
-  font-size: 7rem;
-  font-weight: 600;
-  line-height: .9;
+.memory-modal__journey-glyph {
+  display: grid;
+  place-items: center;
+  width: min(190px, 38vw);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 32%;
+  background: rgba(255,255,255,.06);
+  color: white;
+  font-size: clamp(4rem, 10vw, 7rem);
+  box-shadow: 0 0 60px rgba(255,255,255,.06);
 }
 
-.memory-modal__fallback p {
-  max-width: 300px;
-  margin: 18px auto 0;
-  color: var(--muted);
-  font-size: .72rem;
-  line-height: 1.55;
+.memory-modal__journey-badge {
+  margin-top: 22px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(10,7,24,.32);
+  color: rgba(255,255,255,.78);
+  font-size: .56rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
 }
 
 .memory-modal__shine {
@@ -682,10 +709,15 @@ body.memory-modal-open { overflow: hidden; }
     padding: 20px 13px;
   }
 
-  .memory-modal__image-wrap {
+  .memory-modal__journey-wrap {
     width: min(72vw,310px);
     height: min(54vh,455px);
     min-height: 340px;
+    padding: 20px;
+  }
+
+  .memory-modal__journey-glyph {
+    width: min(170px, 44vw);
   }
 
   .memory-modal__nav {
@@ -699,4 +731,29 @@ body.memory-modal-open { overflow: hidden; }
   .memory-modal__copy { padding: 24px 22px 28px; }
   .memory-modal__copy h2 { font-size: clamp(2.6rem,14vw,4rem); }
   .memory-modal__copy > p:not(.eyebrow) { font-size: 1.18rem; }
+}
+
+
+.memory-modal__stage[data-journey-theme="beginning"] .memory-modal__journey-wrap {
+  background:
+    radial-gradient(circle at 50% 24%, rgba(231,198,128,.18), transparent 28%),
+    linear-gradient(145deg, #5f4474, #22123c 72%);
+}
+
+.memory-modal__stage[data-journey-theme="struggle"] .memory-modal__journey-wrap {
+  background:
+    radial-gradient(circle at 50% 24%, rgba(246,166,205,.18), transparent 28%),
+    linear-gradient(145deg, #6f4473, #24133f 72%);
+}
+
+.memory-modal__stage[data-journey-theme="purpose"] .memory-modal__journey-wrap {
+  background:
+    radial-gradient(circle at 50% 24%, rgba(169,240,207,.18), transparent 28%),
+    linear-gradient(145deg, #476b74, #171d39 72%);
+}
+
+.memory-modal__stage[data-journey-theme="next"] .memory-modal__journey-wrap {
+  background:
+    radial-gradient(circle at 50% 24%, rgba(188,167,255,.22), transparent 30%),
+    linear-gradient(145deg, #654489, #241341 72%);
 }

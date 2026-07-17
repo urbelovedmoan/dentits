@@ -360,11 +360,52 @@ strong {
   animation: pulse-dot 1.8s ease-in-out infinite alternate;
 }
 
-.dot-1 { left: 9%; top: 54%; }
-.dot-2 { left: 28%; top: 22%; }
-.dot-3 { left: 50%; top: 43%; }
-.dot-4 { left: 71%; top: 18%; }
-.dot-5 { left: 87%; top: 58%; }
+/* Taurus opening constellation */
+.mini-constellation--taurus {
+  width: min(320px, 76vw);
+  aspect-ratio: 15 / 8.5;
+}
+
+.constellation-label {
+  position: absolute;
+  right: -4px;
+  top: -18px;
+  color: rgba(231, 198, 128, 0.92);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.mini-constellation--taurus path:first-of-type {
+  animation-duration: 3.2s;
+}
+
+.mini-constellation--taurus path:last-of-type {
+  animation-delay: 900ms;
+  animation-duration: 2.4s;
+}
+
+.dot-1 { left: 9%; top: 56%; }
+.dot-2 { left: 27%; top: 42%; }
+.dot-3 { left: 46%; top: 22%; }
+.dot-4 { left: 47%; top: 55%; }
+.dot-5 { left: 33%; top: 77%; }
+.dot-6 { left: 69%; top: 62%; }
+.dot-7 { left: 79%; top: 73%; }
+.dot-8 { left: 60%; top: 12%; }
+
+@media (max-width: 640px) {
+  .mini-constellation--taurus {
+    width: min(276px, 78vw);
+  }
+
+  .constellation-label {
+    top: -16px;
+    font-size: 0.56rem;
+    letter-spacing: 0.16em;
+  }
+}
 
 .loader {
   display: grid;

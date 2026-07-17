@@ -67,18 +67,23 @@
       <div class="scene-inner scene-inner--narrow">
         <p class="eyebrow">18 · 07 · 2026</p>
 
-        <div class="mini-constellation" aria-hidden="true">
+        <div class="mini-constellation mini-constellation--taurus" aria-hidden="true">
+          <span class="constellation-label">Taurus</span>
           <span class="constellation-dot dot-1"></span>
           <span class="constellation-dot dot-2"></span>
           <span class="constellation-dot dot-3"></span>
           <span class="constellation-dot dot-4"></span>
           <span class="constellation-dot dot-5"></span>
-          <svg viewBox="0 0 260 140" role="presentation">
-            <path d="M28 78 L78 34 L132 62 L186 27 L230 83 L169 112 L104 103 Z" />
+          <span class="constellation-dot dot-6"></span>
+          <span class="constellation-dot dot-7"></span>
+          <span class="constellation-dot dot-8"></span>
+          <svg viewBox="0 0 300 170" role="presentation">
+            <path d="M34 94 L86 70 L144 46 L146 90 L102 132 L146 90 L214 100 L244 118" />
+            <path d="M146 90 L182 34" />
           </svg>
         </div>
 
-        <p class="opening-copy" id="loadingCopy">Preparing a universe for someone extraordinary...</p>
+        <p class="opening-copy" id="loadingCopy">Preparing a Taurus universe for someone extraordinary...</p>
 
         <h1 id="loadingTitle" class="brand-title">AVINVERSE</h1>
         <p class="brand-subtitle">A graduation journey made with love.</p>
@@ -638,12 +643,12 @@
               <div class="courage-collected-message__copy">
                 <strong>Crystal of Courage safely stored.</strong>
                 <p>
-                  Next destination: <strong>Memory Shards</strong>, where four
-                  photographs become floating portals of memories.
+                  Next destination: <strong>Journey Shards</strong>, where four
+                  milestones reveal Avin’s path toward becoming a dentist.
                 </p>
               </div>
               <button id="continueToMemoriesButton" class="primary-button" type="button">
-                Open Memory Shards
+                Open Journey Shards
                 <span aria-hidden="true">→</span>
               </button>
             </div>
@@ -652,22 +657,22 @@
       </div>
     </section>
 
-    <!-- SCENE 7: MEMORY SHARDS -->
+    <!-- SCENE 7: JOURNEY SHARDS -->
     <section class="scene scene--memories" data-scene="6" aria-labelledby="memoriesSceneTitle" hidden>
       <div class="scene-inner memories-layout">
         <aside class="memories-intro">
-          <p class="eyebrow">Avinverse archive · Four fragments</p>
-          <h2 id="memoriesSceneTitle">Memory<br />Shards</h2>
+          <p class="eyebrow">Avinverse archive · Four milestones</p>
+          <h2 id="memoriesSceneTitle">Journey<br />Shards</h2>
           <p class="memories-intro__description">
-            Tidak dibutuhkan ratusan foto untuk menyimpan sesuatu yang berarti.
-            Empat potongan kecil pun cukup untuk mengingatkan betapa berharganya
-            seseorang di dalam sebuah perjalanan.
+            Tidak semua perjalanan perlu diingat melalui foto. Empat fragmen ini
+            merangkum langkah-langkah penting yang membawa Avin sampai ke hari
+            wisudanya.
           </p>
 
           <div class="memory-scan glass-panel">
             <div class="memory-scan__header">
               <div>
-                <small>ARCHIVE SCAN</small>
+                <small>JOURNEY SCAN</small>
                 <strong id="memoryScanText">0 of 4 shards viewed</strong>
               </div>
               <span id="memoryScanPercent">0%</span>
@@ -683,13 +688,13 @@
             </div>
             <div>
               <small>REWARD</small>
-              <strong id="memoryCrystalStatus">Crystal of Memories · Dormant</strong>
-              <p>Open every shard to restore its light.</p>
+              <strong id="memoryCrystalStatus">Crystal of Journey · Dormant</strong>
+              <p>Open every shard to restore Avin’s journey.</p>
             </div>
           </div>
 
           <p class="memory-help">
-            Klik atau sentuh setiap kristal. Di dalam tampilan foto, gunakan
+            Klik atau sentuh setiap shard. Di dalam tampilan fragmen, gunakan
             tombol panah, keyboard, atau swipe untuk berpindah.
           </p>
         </aside>
@@ -697,21 +702,22 @@
         <div class="memory-gallery-panel glass-panel">
           <div class="memory-gallery-heading">
             <div>
-              <p class="eyebrow">Select a floating fragment</p>
-              <h3>Four moments, one special person.</h3>
+              <p class="eyebrow">Select a journey fragment</p>
+              <h3>Four milestones, one remarkable journey.</h3>
             </div>
             <button id="resetMemoriesButton" class="text-button" type="button">
-              Reset archive
+              Reset journey
             </button>
           </div>
 
+          
           <div id="memoryShardsGrid" class="memory-shards-grid">
-            <button class="memory-shard memory-shard--one" type="button" data-memory-index="0">
+            <button class="memory-shard journey-shard journey-shard--one" type="button" data-memory-index="0" data-journey-theme="beginning">
               <span class="memory-shard__glow" aria-hidden="true"></span>
               <span class="memory-shard__frame">
-                <img src="assets/photos/memory-1.jpg" alt="Memory shard 1 featuring Avin" />
-                <span class="memory-shard__fallback" aria-hidden="true">
-                  <strong>AQ</strong><small>memory-1.jpg</small>
+                <span class="journey-shard__art journey-shard__art--beginning" aria-hidden="true">
+                  <span class="journey-shard__icon">✦</span>
+                  <small>FIRST STEP</small>
                 </span>
               </span>
               <span class="memory-shard__meta">
@@ -720,40 +726,40 @@
               <span class="memory-shard__status" aria-hidden="true">Unopened</span>
             </button>
 
-            <button class="memory-shard memory-shard--two" type="button" data-memory-index="1">
+            <button class="memory-shard journey-shard journey-shard--two" type="button" data-memory-index="1" data-journey-theme="struggle">
               <span class="memory-shard__glow" aria-hidden="true"></span>
               <span class="memory-shard__frame">
-                <img src="assets/photos/memory-2.jpg" alt="Memory shard 2 featuring Avin" />
-                <span class="memory-shard__fallback" aria-hidden="true">
-                  <strong>AQ</strong><small>memory-2.jpg</small>
+                <span class="journey-shard__art journey-shard__art--struggle" aria-hidden="true">
+                  <span class="journey-shard__icon">✺</span>
+                  <small>LONG NIGHTS</small>
                 </span>
               </span>
               <span class="memory-shard__meta">
-                <small>FRAGMENT 02</small><strong>The Strength</strong>
+                <small>FRAGMENT 02</small><strong>The Struggle</strong>
               </span>
               <span class="memory-shard__status" aria-hidden="true">Unopened</span>
             </button>
 
-            <button class="memory-shard memory-shard--three" type="button" data-memory-index="2">
+            <button class="memory-shard journey-shard journey-shard--three" type="button" data-memory-index="2" data-journey-theme="purpose">
               <span class="memory-shard__glow" aria-hidden="true"></span>
               <span class="memory-shard__frame">
-                <img src="assets/photos/memory-3.jpg" alt="Memory shard 3 featuring Avin" />
-                <span class="memory-shard__fallback" aria-hidden="true">
-                  <strong>AQ</strong><small>memory-3.jpg</small>
+                <span class="journey-shard__art journey-shard__art--purpose" aria-hidden="true">
+                  <span class="journey-shard__icon">♡</span>
+                  <small>HER PURPOSE</small>
                 </span>
               </span>
               <span class="memory-shard__meta">
-                <small>FRAGMENT 03</small><strong>The Smile</strong>
+                <small>FRAGMENT 03</small><strong>The Purpose</strong>
               </span>
               <span class="memory-shard__status" aria-hidden="true">Unopened</span>
             </button>
 
-            <button class="memory-shard memory-shard--four" type="button" data-memory-index="3">
+            <button class="memory-shard journey-shard journey-shard--four" type="button" data-memory-index="3" data-journey-theme="next">
               <span class="memory-shard__glow" aria-hidden="true"></span>
               <span class="memory-shard__frame">
-                <img src="assets/photos/memory-4.jpg" alt="Memory shard 4 featuring Avin" />
-                <span class="memory-shard__fallback" aria-hidden="true">
-                  <strong>AQ</strong><small>memory-4.jpg</small>
+                <span class="journey-shard__art journey-shard__art--next" aria-hidden="true">
+                  <span class="journey-shard__icon">◆</span>
+                  <small>NEXT CHAPTER</small>
                 </span>
               </span>
               <span class="memory-shard__meta">
@@ -764,17 +770,18 @@
           </div>
 
           <div id="memoryRewardPanel" class="memory-reward-panel" hidden>
+ class="memory-reward-panel" hidden>
             <div class="memory-reward-panel__emblem" aria-hidden="true">◆</div>
             <div>
-              <p class="eyebrow">All fragments restored</p>
-              <h3>Every memory has returned to the Avinverse.</h3>
+              <p class="eyebrow">All milestones restored</p>
+              <h3>Every lesson has become part of Avin’s journey.</h3>
               <p>
-                The moments may be few, but the person inside them means more
-                than any archive could ever measure.
+                Every lesson, struggle, purpose, and dream has now become part of
+                Avin’s story.
               </p>
             </div>
             <button id="collectMemoriesButton" class="primary-button" type="button">
-              Collect Crystal of Memories
+              Collect Crystal of Journey
               <span aria-hidden="true">✦</span>
             </button>
           </div>
@@ -782,7 +789,7 @@
           <div id="memoriesCollectedMessage" class="memories-collected-message" hidden>
             <span aria-hidden="true">✓</span>
             <div class="memories-collected-message__copy">
-              <strong>Crystal of Memories safely stored.</strong>
+              <strong>Crystal of Journey safely stored.</strong>
               <p>
                 The next universe will connect the stars into Avin’s
                 <strong>Constellation of Every Smile</strong>.
@@ -1445,19 +1452,16 @@
       </button>
 
       <div id="memoryModalStage" class="memory-modal__stage">
-        <div class="memory-modal__image-wrap">
-          <img id="memoryModalImage" src="" alt="" />
-          <div id="memoryModalFallback" class="memory-modal__fallback" hidden>
-            <strong>AQ</strong>
-            <p id="memoryModalFallbackFile">Place the photo in assets/photos/</p>
-          </div>
+        <div class="memory-modal__journey-wrap">
+          <div id="journeyModalGlyph" class="memory-modal__journey-glyph" aria-hidden="true">✦</div>
+          <div id="journeyModalBadge" class="memory-modal__journey-badge" aria-hidden="true">FIRST STEP</div>
           <span class="memory-modal__shine" aria-hidden="true"></span>
         </div>
 
-        <button id="previousMemoryButton" class="memory-modal__nav memory-modal__nav--previous" type="button" aria-label="Foto sebelumnya">
+        <button id="previousMemoryButton" class="memory-modal__nav memory-modal__nav--previous" type="button" aria-label="Fragment sebelumnya">
           <span aria-hidden="true">←</span>
         </button>
-        <button id="nextMemoryButton" class="memory-modal__nav memory-modal__nav--next" type="button" aria-label="Foto berikutnya">
+        <button id="nextMemoryButton" class="memory-modal__nav memory-modal__nav--next" type="button" aria-label="Fragment berikutnya">
           <span aria-hidden="true">→</span>
         </button>
       </div>
@@ -1465,11 +1469,11 @@
       <div class="memory-modal__copy">
         <div class="memory-modal__counter">
           <span id="memoryModalNumber">Fragment 01</span>
-          <span id="memoryModalViewed">New memory discovered</span>
+          <span id="memoryModalViewed">New journey fragment discovered</span>
         </div>
         <p id="memoryModalKicker" class="eyebrow">The Beginning</p>
-        <h2 id="memoryModalTitle">Memory title</h2>
-        <p id="memoryModalCaption">Memory caption</p>
+        <h2 id="memoryModalTitle">Journey title</h2>
+        <p id="memoryModalCaption">Journey caption</p>
         <div id="memoryModalDots" class="memory-modal__dots" aria-label="Navigasi foto"></div>
       </div>
     </div>

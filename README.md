@@ -16,8 +16,8 @@ Versi ini sudah berisi:
 - Crystal of Determination reward
 - Defeat Lord Deadline mini-game
 - Crystal of Courage reward
-- Memory Shards four-photo gallery
-- Crystal of Memories reward
+- Journey Shards milestone gallery
+- Crystal of Journey reward
 - Constellation of Every Smile
 - Crystal of Kindness reward
 - Secret Letter from Ansa
@@ -192,7 +192,7 @@ Fitur mini-game:
 
 ## Tahap terbaru
 
-Scene **Memory Shards** telah ditambahkan.
+Scene **Journey Shards** telah ditambahkan.
 
 Fitur galeri:
 
@@ -241,7 +241,7 @@ Fitur konstelasi:
 - Progress koneksi 0–100%
 - Tombol reset stars
 - Hadiah **Crystal of Kindness**
-- Tombol langsung dari Memory Shards menuju konstelasi
+- Tombol langsung dari Journey Shards menuju konstelasi
 
 ## Mengubah pesan bintang
 
@@ -307,7 +307,7 @@ Loading
 → Character Profile
 → Compatibility Test
 → Defeat Lord Deadline
-→ Memory Shards
+→ Journey Shards
 → Constellation of Every Smile
 → Secret Letter
 → Cinematic Graduation Finale
@@ -317,7 +317,7 @@ Loading
 
 Sebelum dibagikan:
 
-1. Pastikan `hero.jpg` dan empat foto memory sudah tampil.
+1. Pastikan `hero.jpg` dan empat journey shards sudah tampil.
 2. Pastikan `background-music.mp3` dapat diputar.
 3. Uji seluruh alur menggunakan laptop.
 4. Uji lagi menggunakan ponsel dalam mode portrait.
@@ -344,3 +344,18 @@ TEXT-EDITING-GUIDE.md
 
 Panduan tersebut menjelaskan lokasi teks opening, portal, profil, kuis, game,
 galeri, konstelasi, surat, dan finale.
+
+
+## Update terbaru
+
+Perubahan tambahan:
+
+- Scene **Memory Shards** diganti menjadi **Journey Shards**
+- Tidak membutuhkan foto lagi pada scene tersebut
+- Setiap shard sekarang berisi milestone perjalanan Avin
+- Animasi opening constellation sekarang membentuk **Taurus**
+
+## File teks yang perlu Anda edit untuk bagian ini
+
+- Ubah isi empat Journey Shards di `memory.js`
+- Ubah bentuk dan label Taurus opening di `index.html` dan `style.css`

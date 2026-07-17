@@ -10,40 +10,44 @@
 
   const memories = [
     {
-      src: "assets/photos/memory-1.jpg",
-      file: "memory-1.jpg",
       kicker: "The Beginning",
-      title: "A beautiful story was already unfolding.",
+      title: "Every great journey begins with one brave decision.",
       caption:
-        "Maybe this photo did not know where the journey would lead. But looking at you now, it feels like every small step was quietly guiding you toward this day.",
-      alt: "A memory of Avin representing the beginning of her journey",
+        "Ada satu titik ketika semua perjalanan ini dimulai—ketika Avin memilih untuk belajar, bertumbuh, dan mengambil jalan yang tidak selalu mudah.",
+      alt: "Journey fragment about the beginning of Avin’s path",
+      glyph: "✦",
+      badge: "FIRST STEP",
+      theme: "beginning",
     },
     {
-      src: "assets/photos/memory-2.jpg",
-      file: "memory-2.jpg",
-      kicker: "The Strength",
-      title: "More strength than the picture could ever show.",
+      kicker: "The Struggle",
+      title: "She continued, even when the journey became exhausting.",
       caption:
-        "Di balik senyum ini ada banyak hal yang mungkin tidak tertangkap kamera: lelah, keberanian, kesabaran, dan keputusan untuk terus melangkah meskipun tidak selalu mudah.",
-      alt: "A memory of Avin representing her strength",
+        "Ada banyak hari yang panjang, tugas yang terasa tidak selesai-selesai, dan mungkin beberapa kali ingin menyerah. Tetapi Avin selalu menemukan alasan untuk melanjutkan.",
+      alt: "Journey fragment about Avin’s long and difficult study nights",
+      glyph: "✺",
+      badge: "LONG NIGHTS",
+      theme: "struggle",
     },
     {
-      src: "assets/photos/memory-3.jpg",
-      file: "memory-3.jpg",
-      kicker: "The Smile",
-      title: "One of my favorite reasons to smile.",
+      kicker: "The Purpose",
+      title: "Knowledge becomes more meaningful when it helps others.",
       caption:
-        "Somehow, you make being intelligent, caring, beautiful, and a little bit obsessed with good food look completely effortless.",
-      alt: "A joyful memory of Avin and her smile",
+        "Avin tidak hanya ingin menjadi dokter gigi. Ia ingin membantu orang memahami pentingnya kesehatan gigi agar mereka dapat hidup lebih sehat dan lebih percaya diri.",
+      alt: "Journey fragment about Avin’s purpose as a future dentist",
+      glyph: "♡",
+      badge: "HER PURPOSE",
+      theme: "purpose",
     },
     {
-      src: "assets/photos/memory-4.jpg",
-      file: "memory-4.jpg",
       kicker: "The Next Chapter",
-      title: "The doctor you became—and the person you always were.",
+      title: "The degree is complete. The real adventure is beginning.",
       caption:
-        "This is not only a memory of where you have been. It is also the beginning of everything still waiting for drg. Avin in the chapters ahead.",
-      alt: "A memory of Avin representing the next chapter after graduation",
+        "Gelar ini bukan akhir perjalanan. Ini adalah pintu menuju pasien pertama, pengalaman baru, mimpi baru, dan semua hal hebat yang masih menunggu drg. Avin.",
+      alt: "Journey fragment about Avin’s next chapter after graduation",
+      glyph: "◆",
+      badge: "NEXT CHAPTER",
+      theme: "next",
     },
   ];
 
@@ -64,9 +68,8 @@
     closeButton: document.getElementById("closeMemoryModalButton"),
     previousButton: document.getElementById("previousMemoryButton"),
     nextButton: document.getElementById("nextMemoryButton"),
-    image: document.getElementById("memoryModalImage"),
-    fallback: document.getElementById("memoryModalFallback"),
-    fallbackFile: document.getElementById("memoryModalFallbackFile"),
+    glyph: document.getElementById("journeyModalGlyph"),
+    badge: document.getElementById("journeyModalBadge"),
     number: document.getElementById("memoryModalNumber"),
     viewed: document.getElementById("memoryModalViewed"),
     kicker: document.getElementById("memoryModalKicker"),
@@ -83,38 +86,15 @@
     completed: false,
   };
 
-  function setupFallbacks() {
-    elements.shards.forEach((shard) => {
-      const image = shard.querySelector("img");
-      const fallback = shard.querySelector(".memory-shard__fallback");
-
-      const showFallback = () => {
-        image.hidden = true;
-        fallback.hidden = false;
-      };
-
-      const showImage = () => {
-        image.hidden = false;
-        fallback.hidden = true;
-      };
-
-      image.addEventListener("error", showFallback);
-      image.addEventListener("load", showImage);
-
-      if (image.complete) {
-        image.naturalWidth > 0 ? showImage() : showFallback();
-      }
-    });
-  }
-
   function buildDots() {
     const fragment = document.createDocumentFragment();
 
-    memories.forEach((_, index) => {
+    memories.forEach((item, index) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "memory-modal__dot";
       button.setAttribute("aria-label", `Buka fragment ${index + 1}`);
+      button.title = item.kicker;
       button.addEventListener("click", () => showMemory(index));
       fragment.appendChild(button);
     });
@@ -142,12 +122,12 @@
     if (state.completed) {
       elements.crystalMini.classList.add("is-restored");
       elements.crystalStatus.textContent = app.state.memoriesCollected
-        ? "Crystal of Memories · Safely Stored"
-        : "Crystal of Memories · Restored";
+        ? "Crystal of Journey · Safely Stored"
+        : "Crystal of Journey · Restored";
       elements.rewardPanel.hidden = app.state.memoriesCollected;
     } else {
       elements.crystalMini.classList.remove("is-restored");
-      elements.crystalStatus.textContent = "Crystal of Memories · Dormant";
+      elements.crystalStatus.textContent = "Crystal of Journey · Dormant";
       elements.rewardPanel.hidden = true;
     }
 
@@ -156,7 +136,7 @@
 
   function showMemory(index) {
     const safeIndex = (index + memories.length) % memories.length;
-    const memory = memories[safeIndex];
+    const item = memories[safeIndex];
     const revisited = state.viewed.has(safeIndex);
 
     state.activeIndex = safeIndex;
@@ -164,27 +144,14 @@
 
     elements.number.textContent = `Fragment ${String(safeIndex + 1).padStart(2, "0")}`;
     elements.viewed.textContent = revisited
-      ? "Memory revisited"
-      : "New memory discovered";
-    elements.kicker.textContent = memory.kicker;
-    elements.title.textContent = memory.title;
-    elements.caption.textContent = memory.caption;
-    elements.fallbackFile.textContent =
-      `Place ${memory.file} inside assets/photos/`;
-    elements.image.alt = memory.alt;
-    elements.image.hidden = false;
-    elements.fallback.hidden = true;
-    elements.image.src = memory.src;
-
-    elements.image.onerror = () => {
-      elements.image.hidden = true;
-      elements.fallback.hidden = false;
-    };
-
-    elements.image.onload = () => {
-      elements.image.hidden = false;
-      elements.fallback.hidden = true;
-    };
+      ? "Journey fragment revisited"
+      : "New journey fragment discovered";
+    elements.kicker.textContent = item.kicker;
+    elements.title.textContent = item.title;
+    elements.caption.textContent = item.caption;
+    elements.glyph.textContent = item.glyph;
+    elements.badge.textContent = item.badge;
+    elements.modalStage.dataset.journeyTheme = item.theme;
 
     Array.from(elements.dots.children).forEach((dot, dotIndex) => {
       const active = dotIndex === safeIndex;
@@ -228,10 +195,10 @@
     elements.collectedMessage.hidden = true;
     elements.collectButton.disabled = false;
     elements.collectButton.innerHTML =
-      'Collect Crystal of Memories <span aria-hidden="true">✦</span>';
+      'Collect Crystal of Journey <span aria-hidden="true">✦</span>';
 
     updateProgress();
-    app.showToast("Memory archive reset.");
+    app.showToast("Journey archive reset.");
   }
 
   function collectCrystal() {
@@ -242,10 +209,10 @@
     elements.collectedMessage.hidden = false;
     elements.collectButton.disabled = true;
     elements.crystalStatus.textContent =
-      "Crystal of Memories · Safely Stored";
+      "Crystal of Journey · Safely Stored";
 
     app.updateNavigation();
-    app.showToast("Crystal of Memories added to the Avinverse.");
+    app.showToast("Crystal of Journey added to the Avinverse.");
   }
 
   elements.continueButton?.addEventListener("click", () => app.goToScene(6));
@@ -306,7 +273,6 @@
     true
   );
 
-  setupFallbacks();
   buildDots();
   updateProgress();
 })();

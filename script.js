@@ -506,10 +506,10 @@
     } else if (state.currentScene === 6) {
       elements.nextButton.innerHTML = state.memoriesCollected
         ? 'Open Constellation <span aria-hidden="true">→</span>'
-        : 'Explore Memories <span aria-hidden="true">◇</span>';
+        : 'Explore Journey <span aria-hidden="true">◇</span>';
     } else if (state.currentScene === 5) {
       elements.nextButton.innerHTML = state.courageCollected
-        ? 'Open Memories <span aria-hidden="true">→</span>'
+        ? 'Open Journey <span aria-hidden="true">→</span>'
         : 'Defeat the Boss <span aria-hidden="true">⚔</span>';
     } else if (state.currentScene === 4) {
       elements.nextButton.innerHTML = state.crystalCollected
@@ -1182,12 +1182,12 @@
       }
 
       if (state.currentScene === 5 && !state.courageCollected) {
-        showToast("Collect the Crystal of Courage before opening the memories.");
+        showToast("Collect the Crystal of Courage before opening the journey shards.");
         return;
       }
 
       if (state.currentScene === 6 && !state.memoriesCollected) {
-        showToast("Collect the Crystal of Memories before connecting the stars.");
+        showToast("Collect the Crystal of Journey before connecting the stars.");
         return;
       }
 

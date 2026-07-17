@@ -307,3 +307,49 @@ layout-fixes.css
 ```
 
 Jangan mengedit file CSS hanya untuk mengganti kalimat.
+
+
+## Update terbaru: Journey Shards dan Taurus
+
+### Mengubah isi Journey Shards
+File: `memory.js`
+
+Cari:
+```javascript
+const memories = [
+```
+
+Di sana Anda bisa mengganti:
+- `kicker`
+- `title`
+- `caption`
+- `glyph`
+- `badge`
+
+### Mengubah tulisan scene Journey Shards
+File: `index.html`
+
+Cari:
+```html
+<!-- SCENE 7: JOURNEY SHARDS -->
+```
+
+### Mengubah rasi bintang Taurus di opening
+File: `index.html`
+
+Cari:
+```html
+<div class="mini-constellation mini-constellation--taurus"
+```
+
+File: `style.css`
+
+Cari:
+```css
+/* Taurus opening constellation */
+```
+
+Di bagian ini Anda bisa:
+- mengubah nama label Taurus
+- memindahkan posisi titik (`.dot-1`, `.dot-2`, dst.)
+- mengubah bentuk garis SVG Taurus di `index.html`
