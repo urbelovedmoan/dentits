@@ -323,3 +323,24 @@ Sebelum dibagikan:
 4. Uji lagi menggunakan ponsel dalam mode portrait.
 5. Coba tombol musik, swipe galeri, scroll surat, dan finale.
 6. Buka GitHub Pages melalui mode incognito untuk memastikan file terbaru dimuat.
+
+## Responsive layout patch
+
+File `layout-fixes.css` ditambahkan untuk:
+
+- Memberi jarak aman antara finale dan kontrol musik di bagian atas.
+- Mencegah finale keluar layar pada laptop dan ponsel.
+- Menyesuaikan tampilan finale untuk layar landscape yang pendek.
+- Merapikan opening pada Android ketika memakai mode desktop.
+- Mengaktifkan scroll sebagai cadangan pada finale tanpa meminta pengguna melakukan zoom out.
+
+## Panduan mengganti teks
+
+Lihat file:
+
+```text
+TEXT-EDITING-GUIDE.md
+```
+
+Panduan tersebut menjelaskan lokasi teks opening, portal, profil, kuis, game,
+galeri, konstelasi, surat, dan finale.

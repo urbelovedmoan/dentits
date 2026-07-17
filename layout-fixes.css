@@ -1,0 +1,430 @@
+/*
+  AVINVERSE responsive layout patch
+  Fixes:
+  1. Opening screen wasting header/navigation space before the experience starts.
+  2. Finale content overlapping the fixed music/progress controller.
+  3. Finale and opening overflowing on short laptop screens and Android desktop mode.
+*/
+
+/* The opening has no visible header or bottom navigation, so it does not need their reserved space. */
+.scene--loading .scene-inner {
+  min-height: 100%;
+  padding-top: max(24px, calc(env(safe-area-inset-top) + 16px));
+  padding-bottom: max(24px, calc(env(safe-area-inset-bottom) + 16px));
+}
+
+.scene--loading .scene-inner--narrow {
+  align-content: center;
+}
+
+/* The finale must remain scrollable when the device has a short viewport. */
+.scene--finale {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.scene--finale .finale-layout {
+  align-content: center;
+  min-height: 100%;
+  padding-top: max(
+    138px,
+    calc(var(--header-height) + env(safe-area-inset-top) + 66px)
+  );
+  padding-bottom: max(
+    128px,
+    calc(var(--nav-height) + env(safe-area-inset-bottom) + 38px)
+  );
+}
+
+.finale-view {
+  width: min(100%, 1180px);
+  min-height: clamp(430px, calc(100dvh - 290px), 650px);
+}
+
+.finale-view--intro,
+.finale-view--complete {
+  padding-inline: clamp(8px, 2vw, 24px);
+}
+
+.finale-view--intro h2,
+.finale-view--complete h2,
+.finale-title-block h2,
+.finale-celebration-message h3 {
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.finale-portrait-system {
+  min-height: min(52vh, 510px);
+}
+
+.finale-portrait {
+  width: min(70vw, 370px, 41vh);
+}
+
+.finale-title-block h2 {
+  font-size: clamp(3.15rem, 5.8vw, 6rem);
+}
+
+.finale-celebration-message {
+  width: min(100%, 820px);
+}
+
+/* Standard phones and narrow browser windows. */
+@media (max-width: 640px) {
+  .scene--loading .scene-inner {
+    width: calc(100% - 28px);
+    padding-top: max(18px, calc(env(safe-area-inset-top) + 12px));
+    padding-bottom: max(18px, calc(env(safe-area-inset-bottom) + 12px));
+  }
+
+  .scene--loading .mini-constellation {
+    width: min(235px, 62vw);
+  }
+
+  .scene--loading .brand-title {
+    font-size: clamp(3.25rem, 18vw, 5.15rem);
+  }
+
+  .scene--loading .brand-subtitle {
+    margin: 11px 0 22px;
+  }
+
+  .scene--loading .opening-copy {
+    margin-top: 14px;
+  }
+
+  .scene--finale .finale-layout {
+    width: calc(100% - 20px);
+    padding-top: max(
+      122px,
+      calc(var(--header-height) + env(safe-area-inset-top) + 50px)
+    );
+    padding-bottom: max(
+      112px,
+      calc(var(--nav-height) + env(safe-area-inset-bottom) + 30px)
+    );
+  }
+
+  .finale-view {
+    min-height: clamp(430px, calc(100dvh - 250px), 610px);
+  }
+
+  .finale-view--intro h2,
+  .finale-view--complete h2 {
+    font-size: clamp(2.8rem, 14.5vw, 4.35rem);
+  }
+
+  .finale-crystal-system {
+    width: 230px;
+    height: 188px;
+    margin-bottom: 10px;
+    transform: scale(0.92);
+  }
+
+  .finale-portrait-system {
+    min-height: 360px;
+  }
+
+  .finale-portrait {
+    width: min(70vw, 285px, 38vh);
+  }
+
+  .finale-title-block h2 {
+    font-size: clamp(2.75rem, 13.7vw, 4.15rem);
+  }
+
+  .finale-title-block blockquote {
+    margin-top: 18px;
+    font-size: 1.12rem;
+  }
+
+  .finale-celebration-message h3 {
+    font-size: clamp(2.55rem, 13.5vw, 4.15rem);
+  }
+
+  .finale-complete-emblem {
+    width: 98px;
+    height: 98px;
+    margin-bottom: 18px;
+  }
+
+  .finale-complete-emblem__ring::before,
+  .finale-complete-emblem__ring::after {
+    left: 40px;
+  }
+}
+
+/* Short laptop screens and Android browsers using “Desktop site”. */
+@media (max-height: 760px) {
+  .scene--loading .scene-inner {
+    padding-top: max(12px, calc(env(safe-area-inset-top) + 8px));
+    padding-bottom: max(12px, calc(env(safe-area-inset-bottom) + 8px));
+  }
+
+  .scene--loading .mini-constellation {
+    width: min(220px, 32vh);
+  }
+
+  .scene--loading .opening-copy {
+    margin-top: 8px;
+  }
+
+  .scene--loading .brand-title {
+    margin-top: 7px;
+    font-size: clamp(3.1rem, 8vw, 5rem);
+  }
+
+  .scene--loading .brand-subtitle {
+    margin: 8px 0 16px;
+  }
+
+  .scene--loading .loader {
+    margin-bottom: 13px;
+  }
+
+  .scene--loading .microcopy {
+    margin-top: 8px;
+  }
+
+  .scene--finale .finale-layout {
+    padding-top: max(
+      104px,
+      calc(var(--header-height) + env(safe-area-inset-top) + 30px)
+    );
+    padding-bottom: max(
+      92px,
+      calc(var(--nav-height) + env(safe-area-inset-bottom) + 14px)
+    );
+  }
+
+  .finale-view {
+    min-height: clamp(350px, calc(100dvh - 215px), 505px);
+  }
+
+  .finale-crystal-system {
+    margin-top: -18px;
+    margin-bottom: -10px;
+    transform: scale(0.78);
+  }
+
+  .finale-view--intro h2,
+  .finale-view--complete h2 {
+    font-size: clamp(2.65rem, 6vw, 4.55rem);
+  }
+
+  .finale-view--intro > p:not(.eyebrow),
+  .finale-view--complete > p:not(.eyebrow, .finale-copy-status) {
+    margin: 13px 0 18px;
+    line-height: 1.55;
+  }
+
+  .finale-intro-note {
+    margin-top: 8px;
+  }
+
+  .finale-portrait-system {
+    min-height: 340px;
+  }
+
+  .finale-portrait {
+    width: min(30vw, 285px, 43vh);
+  }
+
+  .finale-title-block h2 {
+    font-size: clamp(2.65rem, 5vw, 4.35rem);
+  }
+
+  .finale-guardian-title {
+    margin-top: 14px;
+  }
+
+  .finale-title-block blockquote {
+    margin-top: 16px;
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+  }
+
+  .finale-celebration-symbol {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 14px;
+  }
+
+  .finale-celebration-message h3 {
+    font-size: clamp(2.55rem, 5.7vw, 4.6rem);
+  }
+
+  .finale-celebration-message > p:last-child {
+    margin-top: 12px;
+  }
+
+  .finale-complete-emblem {
+    width: 92px;
+    height: 92px;
+    margin-bottom: 15px;
+  }
+
+  .finale-complete-card {
+    margin-bottom: 18px;
+    padding: 15px 20px;
+  }
+}
+
+/* Very short landscape screens, commonly Android desktop mode. */
+@media (max-height: 520px) {
+  .scene--loading .mini-constellation {
+    display: none;
+  }
+
+  .scene--loading .opening-copy {
+    margin-top: 2px;
+  }
+
+  .scene--loading .brand-title {
+    font-size: clamp(2.8rem, 7vw, 4rem);
+  }
+
+  .scene--loading .brand-subtitle {
+    margin: 5px 0 11px;
+  }
+
+  .scene--loading .loader {
+    margin-bottom: 9px;
+  }
+
+  .scene--loading .primary-button {
+    min-height: 44px;
+    padding-block: 10px;
+  }
+
+  .scene--loading .microcopy {
+    display: none;
+  }
+
+  .scene--finale .finale-layout {
+    padding-top: max(
+      84px,
+      calc(var(--header-height) + env(safe-area-inset-top) + 14px)
+    );
+    padding-bottom: max(
+      76px,
+      calc(var(--nav-height) + env(safe-area-inset-bottom) + 6px)
+    );
+  }
+
+  .finale-view {
+    min-height: 300px;
+  }
+
+  .finale-crystal-system {
+    width: 210px;
+    height: 150px;
+    margin: -40px 0 -18px;
+    transform: scale(0.66);
+  }
+
+  .finale-view--intro h2,
+  .finale-view--complete h2 {
+    font-size: clamp(2.25rem, 5vw, 3.45rem);
+  }
+
+  .finale-view--intro > p:not(.eyebrow),
+  .finale-view--complete > p:not(.eyebrow, .finale-copy-status) {
+    max-width: 75ch;
+    margin: 8px 0 12px;
+    font-size: 0.82rem;
+  }
+
+  .finale-intro-note {
+    display: none;
+  }
+
+  .finale-start-button {
+    min-height: 43px;
+    padding-block: 9px;
+  }
+
+  .finale-story-line {
+    font-size: clamp(2rem, 5vw, 3.45rem);
+  }
+
+  .finale-hero-reveal {
+    grid-template-columns: minmax(200px, 0.78fr) minmax(320px, 1.22fr);
+    gap: 24px;
+  }
+
+  .finale-portrait-system {
+    min-height: 280px;
+  }
+
+  .finale-portrait {
+    width: min(25vw, 215px, 46vh);
+  }
+
+  .finale-portrait-orbit--one {
+    width: min(34vw, 290px);
+  }
+
+  .finale-portrait-orbit--two {
+    width: min(29vw, 245px);
+  }
+
+  .finale-title-block h2 {
+    font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  }
+
+  .finale-guardian-title {
+    margin-top: 9px;
+    font-size: 0.6rem;
+  }
+
+  .finale-title-block blockquote {
+    margin-top: 10px;
+    font-size: 0.94rem;
+    line-height: 1.35;
+  }
+
+  .finale-celebration-symbol {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+  }
+
+  .finale-celebration-message h3 {
+    font-size: clamp(2.25rem, 5vw, 3.55rem);
+  }
+
+  .finale-celebration-message > p:last-child {
+    margin-top: 8px;
+    font-size: 1rem;
+  }
+
+  .finale-complete-emblem {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 8px;
+  }
+
+  .finale-complete-emblem__heart {
+    width: 52px;
+    height: 52px;
+  }
+
+  .finale-complete-emblem__ring::before,
+  .finale-complete-emblem__ring::after {
+    display: none;
+  }
+
+  .finale-complete-card {
+    margin-bottom: 10px;
+    padding: 10px 18px;
+  }
+
+  .finale-actions .primary-button,
+  .finale-actions .secondary-button {
+    min-height: 42px;
+    padding-block: 8px;
+  }
+}
