@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1250" viewBox="0 0 1000 1250">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="20%" r="80%">
+      <stop offset="0" stop-color="#bca7ff" stop-opacity=".72"/>
+      <stop offset=".48" stop-color="#6a438d" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#18102f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="1250" fill="url(#glow)"/>
+  <circle cx="500" cy="470" r="290" fill="none" stroke="#f6a6cd" stroke-opacity=".35" stroke-width="3"/>
+  <circle cx="500" cy="470" r="345" fill="none" stroke="#e7c680" stroke-opacity=".25" stroke-width="2" stroke-dasharray="10 20"/>
+  <text x="500" y="520" fill="#fffafc" font-size="230" font-family="Georgia, serif" text-anchor="middle">AQ</text>
+  <text x="500" y="620" fill="#e9dff3" font-size="28" font-family="Arial, sans-serif" letter-spacing="6" text-anchor="middle">REPLACE WITH HERO.JPG</text>
+</svg>

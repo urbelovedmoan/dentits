@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#120d27" />
+  <meta name="description" content="A graduation universe made especially for drg. Avivien Aurandia Qanita." />
+
+  <title>AVINVERSE — Graduation Journey</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <noscript>
+    <div class="noscript-message">
+      Website ini membutuhkan JavaScript agar animasi dan navigasinya dapat berjalan.
+    </div>
+  </noscript>
+
+  <canvas id="cosmicCanvas" aria-hidden="true"></canvas>
+  <div id="stars" class="stars" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow--one" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow--two" aria-hidden="true"></div>
+
+  <audio id="backgroundMusic" loop preload="metadata">
+    <source src="assets/music/background-music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <header id="appHeader" class="app-header is-hidden" aria-label="Kontrol halaman">
+    <button id="homeButton" class="icon-button" type="button" aria-label="Kembali ke awal" title="Kembali ke awal">
+      <span aria-hidden="true">✦</span>
+    </button>
+
+    <div class="scene-status" aria-live="polite">
+      <span id="sceneLabel">Universe 1 of 4</span>
+      <div class="scene-progress" aria-hidden="true">
+        <span id="sceneProgressBar"></span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button id="motionButton" class="icon-button" type="button" aria-label="Kurangi animasi" title="Kurangi animasi">
+        <span aria-hidden="true">◌</span>
+      </button>
+      <button id="musicButton" class="icon-button" type="button" aria-label="Putar musik" title="Putar musik">
+        <span id="musicIcon" aria-hidden="true">♪</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="app" class="app">
+    <!-- SCENE 1: LOADING / OPENING -->
+    <section class="scene scene--loading is-active" data-scene="0" aria-labelledby="loadingTitle">
+      <div class="scene-inner scene-inner--narrow">
+        <p class="eyebrow">18 · 07 · 2026</p>
+
+        <div class="mini-constellation" aria-hidden="true">
+          <span class="constellation-dot dot-1"></span>
+          <span class="constellation-dot dot-2"></span>
+          <span class="constellation-dot dot-3"></span>
+          <span class="constellation-dot dot-4"></span>
+          <span class="constellation-dot dot-5"></span>
+          <svg viewBox="0 0 260 140" role="presentation">
+            <path d="M28 78 L78 34 L132 62 L186 27 L230 83 L169 112 L104 103 Z" />
+          </svg>
+        </div>
+
+        <p class="opening-copy" id="loadingCopy">Preparing a universe for someone extraordinary...</p>
+
+        <h1 id="loadingTitle" class="brand-title">AVINVERSE</h1>
+        <p class="brand-subtitle">A graduation journey made with love.</p>
+
+        <div class="loader" aria-label="Memuat halaman">
+          <div class="loader-track">
+            <span id="loaderBar" class="loader-bar"></span>
+          </div>
+          <span id="loaderValue" class="loader-value">0%</span>
+        </div>
+
+        <button id="enterButton" class="primary-button" type="button" disabled>
+          <span>Enter the Avinverse</span>
+          <span class="button-spark" aria-hidden="true">✦</span>
+        </button>
+
+        <p class="microcopy">
+          Gunakan earphone untuk pengalaman terbaik.
+        </p>
+      </div>
+    </section>
+
+    <!-- SCENE 2: PORTAL -->
+    <section class="scene scene--portal" data-scene="1" aria-labelledby="portalTitle" hidden>
+      <div class="scene-inner scene-inner--portal">
+        <div class="portal-stage" aria-hidden="true">
+          <div class="portal-shadow"></div>
+          <div class="portal portal--outer"></div>
+          <div class="portal portal--middle"></div>
+          <div class="portal portal--inner"></div>
+          <div class="portal-core">
+            <span class="portal-star">✦</span>
+          </div>
+        </div>
+
+        <div class="portal-copy glass-panel">
+          <p class="eyebrow">Mission completed</p>
+          <h2 id="portalTitle">
+            Somewhere in this universe,<br />
+            a new dentist has arrived.
+          </h2>
+          <p>
+            Setelah semua lelah, keberanian, doa, dan perjuangan,
+            satu gelar baru akhirnya berhasil dibuka.
+          </p>
+
+          <button id="openPortalButton" class="primary-button" type="button">
+            Open the Portal
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 3: HERO REVEAL -->
+    <section class="scene scene--hero" data-scene="2" aria-labelledby="heroName" hidden>
+      <div class="scene-inner hero-layout">
+        <div class="hero-portrait-wrap">
+          <div class="portrait-orbit portrait-orbit--one" aria-hidden="true"></div>
+          <div class="portrait-orbit portrait-orbit--two" aria-hidden="true"></div>
+
+          <div class="hero-portrait">
+            <img
+              id="heroImage"
+              src="assets/photos/hero.jpg"
+              alt="Foto drg. Avivien Aurandia Qanita"
+            />
+            <div id="heroFallback" class="hero-fallback" aria-hidden="true">
+              <span>AQ</span>
+              <small>Place your hero.jpg here</small>
+            </div>
+          </div>
+
+          <span class="floating-badge floating-badge--top">NEW TITLE UNLOCKED</span>
+          <span class="floating-badge floating-badge--bottom">THE GUARDIAN OF EVERY SMILE</span>
+        </div>
+
+        <div class="hero-copy">
+          <p class="hero-word" data-reveal-word>Intelligent.</p>
+          <p class="hero-word" data-reveal-word>Patient.</p>
+          <p class="hero-word" data-reveal-word>Kind-hearted.</p>
+          <p class="hero-word" data-reveal-word>Stronger than every deadline.</p>
+
+          <div class="hero-name-block">
+            <p class="eyebrow">Introducing</p>
+            <h2 id="heroName">
+              <span id="graduateTitle">drg.</span>
+              <span id="graduateName">Avivien Aurandia Qanita</span>
+            </h2>
+            <p class="hero-tagline">The Guardian of Every Smile</p>
+          </div>
+
+          <blockquote>
+            Hari ini, semua usaha, keberanian, lelah, dan doa itu akhirnya
+            memiliki nama baru: <strong>drg. Avin.</strong>
+          </blockquote>
+
+          <button class="primary-button js-next-scene" type="button">
+            View Character Profile
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 4: CHARACTER PROFILE -->
+    <section class="scene scene--profile" data-scene="3" aria-labelledby="profileTitle" hidden>
+      <div class="scene-inner profile-layout">
+        <div class="profile-intro">
+          <p class="eyebrow">Avinverse archives · File 180726</p>
+          <h2 id="profileTitle">Character Profile</h2>
+          <p>
+            Data menunjukkan bahwa subjek telah menyelesaikan misi akademik
+            dengan tingkat keteguhan hati di luar batas pengukuran.
+          </p>
+
+          <div class="quote-card">
+            <span aria-hidden="true">“</span>
+            <p>In every universe, she was destined to make people smile.</p>
+          </div>
+        </div>
+
+        <article class="character-card">
+          <div class="character-card__header">
+            <div>
+              <p class="card-kicker">OFFICIAL GRADUATE RECORD</p>
+              <h3 id="profileDisplayName">drg. Avivien Aurandia Qanita</h3>
+            </div>
+            <div class="verified-seal" aria-label="Terverifikasi">
+              <span>✦</span>
+              <small>VERIFIED</small>
+            </div>
+          </div>
+
+          <dl class="profile-data">
+            <div>
+              <dt>Codename</dt>
+              <dd>Avin</dd>
+            </div>
+            <div>
+              <dt>Main Power</dt>
+              <dd>Educating people about dental health</dd>
+            </div>
+            <div>
+              <dt>Energy Source</dt>
+              <dd>Sate Padang &amp; Indomie Goreng</dd>
+            </div>
+            <div>
+              <dt>Current Status</dt>
+              <dd class="status-complete">Officially Graduated</dd>
+            </div>
+          </dl>
+
+          <div class="stats" aria-label="Statistik karakter">
+            <div class="stat-row" data-stat="100">
+              <div class="stat-label"><span>Intelligence</span><strong>100%</strong></div>
+              <div class="stat-track"><span></span></div>
+            </div>
+
+            <div class="stat-row" data-stat="100">
+              <div class="stat-label"><span>Patience</span><strong>100%</strong></div>
+              <div class="stat-track"><span></span></div>
+            </div>
+
+            <div class="stat-row" data-stat="100">
+              <div class="stat-label"><span>Dental Knowledge</span><strong>100%</strong></div>
+              <div class="stat-track"><span></span></div>
+            </div>
+
+            <div class="stat-row" data-stat="96">
+              <div class="stat-label"><span>Deadline Resistance</span><strong>999%</strong></div>
+              <div class="stat-track"><span></span></div>
+            </div>
+
+            <div class="stat-row stat-row--infinite" data-stat="100">
+              <div class="stat-label"><span>Making Ansa Proud</span><strong>∞</strong></div>
+              <div class="stat-track"><span></span></div>
+            </div>
+          </div>
+
+          <div class="profile-footer">
+            <p>Graduation Date</p>
+            <strong>Saturday, 18 July 2026</strong>
+          </div>
+        </article>
+
+        <div class="phase-complete glass-panel">
+          <span class="phase-complete__icon" aria-hidden="true">✦</span>
+          <div>
+            <p class="eyebrow">Foundation complete</p>
+            <h3>The next universe is ready.</h3>
+            <p>
+              Pada tahap berikutnya, bagian ini akan terhubung ke
+              <strong>The Avin Compatibility Test</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav id="sceneNavigation" class="scene-navigation is-hidden" aria-label="Navigasi antarbagian">
+    <button id="previousButton" class="secondary-button" type="button">
+      <span aria-hidden="true">←</span>
+      Previous
+    </button>
+
+    <div id="sceneDots" class="scene-dots" aria-label="Posisi bagian"></div>
+
+    <button id="nextButton" class="secondary-button" type="button">
+      Next
+      <span aria-hidden="true">→</span>
+    </button>
+  </nav>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
