@@ -13,7 +13,7 @@
       kicker: "The Beginning",
       title: "Every great journey begins with one brave decision.",
       caption:
-        "Ada satu titik ketika semua perjalanan ini dimulai—ketika Avin memilih untuk belajar, bertumbuh, dan mengambil jalan yang tidak selalu mudah.",
+        "Ada satu titik ketika semua perjalanan ini dimulai—ketika kamu memilih untuk belajar, bertumbuh, dan mengambil jalan yang tidak selalu mudah.",
       alt: "Journey fragment about the beginning of Avin’s path",
       glyph: "✦",
       badge: "FIRST STEP",
@@ -23,7 +23,7 @@
       kicker: "The Struggle",
       title: "She continued, even when the journey became exhausting.",
       caption:
-        "Ada banyak hari yang panjang, tugas yang terasa tidak selesai-selesai, dan mungkin beberapa kali ingin menyerah. Tetapi Avin selalu menemukan alasan untuk melanjutkan.",
+        "Ada banyak hari yang panjang, tugas yang terasa tidak selesai-selesai, dan mungkin beberapa kali ingin menyerah. Tetapi kamu selalu menemukan alasan untuk melanjutkan.",
       alt: "Journey fragment about Avin’s long and difficult study nights",
       glyph: "✺",
       badge: "LONG NIGHTS",
@@ -33,7 +33,7 @@
       kicker: "The Purpose",
       title: "Knowledge becomes more meaningful when it helps others.",
       caption:
-        "Avin tidak hanya ingin menjadi dokter gigi. Ia ingin membantu orang memahami pentingnya kesehatan gigi agar mereka dapat hidup lebih sehat dan lebih percaya diri.",
+        "Kamu pasti tidak hanya ingin menjadi dokter gigi. Ia ingin membantu orang memahami pentingnya kesehatan gigi agar mereka dapat hidup lebih sehat dan lebih percaya diri.",
       alt: "Journey fragment about Avin’s purpose as a future dentist",
       glyph: "♡",
       badge: "HER PURPOSE",
